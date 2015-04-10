@@ -1,10 +1,9 @@
 <?php
 
-namespace PerfectBuild\Monsters;
+namespace PerfectBuild\Minions;
 
-Class Monsters{
+Class Minions{
 	
-	protected $level;
 	protected $gold;
 	protected $experience;
 	protected $health;
@@ -12,9 +11,6 @@ Class Monsters{
 	protected $attack_speed;
 	protected $armor;
 	protected $magic_resistance;
-	protected $movement_speed;
-	protected $spawn_time;
-	protected $respawn_time;
 	
 	public function __construct() {
 		
