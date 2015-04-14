@@ -5,7 +5,7 @@ namespace PerfectBuild\Champions;
 class SuperMinion extends \PerfectBuild\Champions\Champions{
 		
 	// Constructor
-	public function __construct($level) {		
+	public function __construct($level, $spell_level_arr, $summoner_arr, $rune_arr) {		
 		parent::__construct();			
 			
 		// After implementation of masteries...
@@ -27,6 +27,18 @@ class SuperMinion extends \PerfectBuild\Champions\Champions{
 		$this->armor_per_level			= 3.5;
 		$this->base_magic_resist		= 30;
 		$this->base_movement_speed		= 335;
+		
+		$this->spell_level_arr 			= $spell_level_arr;
+		
+		$this->passive_obj 				= new \PerfectBuild\Spells\Dread();
+				
+		$this->spell1_obj 				= new \PerfectBuild\Spells\Terrify();
+		$this->spell2_obj 				= new \PerfectBuild\Spells\Drain();
+		$this->spell3_obj 				= new \PerfectBuild\Spells\DarkWind();
+		$this->spell4_obj 				= new \PerfectBuild\Spells\Crowstorm();
+		
+		$this->summoner1_obj 			= new \PerfectBuild\Summoners\Flash();
+		$this->summoner1_obj 			= new \PerfectBuild\Summoners\Smite();
 		
 	}
 }
