@@ -1,8 +1,8 @@
 <?php
 
-namespace PerfectBuild\Summoners;
+namespace PerfectBuild\Effects;
 
-Class Summoners{
+Class Effects{
 	
 	protected $name;
 		

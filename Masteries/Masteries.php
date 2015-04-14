@@ -1,8 +1,8 @@
 <?php
 
-namespace PerfectBuild\Summoners;
+namespace PerfectBuild\Masteries;
 
-Class Summoners{
+Class Masteries{
 	
 	protected $name;
 		
