@@ -5,8 +5,8 @@ namespace PerfectBuild\Champions;
 class SuperMinion extends \PerfectBuild\Champions\Champions{
 		
 	// Constructor
-	public function __construct($level, $spell_level_arr, $summoner_arr, $rune_arr) {		
-		parent::__construct();			
+	public function __construct($level, $spell_level_arr, $summoner_arr, $rune_arr, $masteries_arr) {		
+		parent::__construct($summoner_arr, $rune_arr, $masteries_arr);			
 			
 		// After implementation of masteries...
 		//$this->gold						= 0;
@@ -23,6 +23,8 @@ class SuperMinion extends \PerfectBuild\Champions\Champions{
 		$this->base_attack_damage		= 48;
 		$this->attack_damage_per_level	= 2.6470588235294117647058823529412;
 		$this->base_attack_speed		= 0.625;
+		$this->attack_speed_per_level	= 2.1117647058823529411764705882353;
+		$this->attack_delay				= 0.0;
 		$this->base_armor				= 20.9;
 		$this->armor_per_level			= 3.5;
 		$this->base_magic_resist		= 30;
@@ -36,9 +38,10 @@ class SuperMinion extends \PerfectBuild\Champions\Champions{
 		$this->spell2_obj 				= new \PerfectBuild\Spells\Drain();
 		$this->spell3_obj 				= new \PerfectBuild\Spells\DarkWind();
 		$this->spell4_obj 				= new \PerfectBuild\Spells\Crowstorm();
-		
-		$this->summoner1_obj 			= new \PerfectBuild\Summoners\Flash();
-		$this->summoner1_obj 			= new \PerfectBuild\Summoners\Smite();
-		
+				
 	}
+
+	public function attack($mob_obj){
+		parent::attack($mob_obj);
+	}	
 }

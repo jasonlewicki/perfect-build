@@ -21,6 +21,8 @@ Class Champions{
 	protected $base_attack_damage;
 	protected $attack_damage_per_level;
 	protected $base_attack_speed;
+	protected $attack_speed_per_level;
+	protected $attack_delay;
 	
 	protected $base_armor;
 	protected $armor_per_level;
@@ -39,8 +41,16 @@ Class Champions{
 	
 	protected $summoner1_obj;
 	protected $summoner2_obj;
+	
+	protected $effects_arr;
 		
-	public function __construct() {
+	public function __construct($summoner_arr, $rune_arr, $masteries_arr) {		
+		
+		$summoner1 = '\PerfectBuild\Summoners\\'.$summoner_arr[0];
+		$summoner2 = '\PerfectBuild\Summoners\\'.$summoner_arr[1];
+		
+		$this->summoner1_obj 			= new $summoner1();
+		$this->summoner2_obj 			= new $summoner2();
 		
 	}
 	
@@ -51,4 +61,9 @@ Class Champions{
 	abstract public function activateSummoner1();
 	abstract public function activateSummoner2();
 	
+	public function attack($mob_obj){
+		
+	}	
+	
 }
+
