@@ -8,11 +8,6 @@ define('DATABASE_INI', '/var/.../application/root/configs/database_example.ini')
 /**
  * Set the application root. This is the actual root of your application.
  */
-define('APP_ROOT', '/var/.../application/root');
-
-/**
- * Set the CryptoTraderHub root.
- */
 define('PERFECT_BUILD_ROOT', '/var/.../perfect-build');
 
 /**
