@@ -17,7 +17,7 @@ Class Engine{
 			
 		$this->time += 1/$this->tickrate;
 		
-		// Stuff	
+		// Engine Stuff	
 			
 		return $this->time;
 		
