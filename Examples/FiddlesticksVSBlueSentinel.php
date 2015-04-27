@@ -23,17 +23,31 @@ $blue_sentinel_obj = new \PerfectBuild\Monsters\BlueSentinel($blue_sentinel_leve
 
 // Create Timeline
 $timeline = Array(
-	0 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj),
-	1 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj),
-	2 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj),
-	3 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj),
-	4 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj),
-	5 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj),
-	6 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj)
+	0 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	1 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	2 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	3 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	4 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	5 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	6 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued')
 );
 
+$tick_rate = $engine_obj->tickRate();
 
 // Step Engine's time
 for($i = 0; ($slice = $engine_obj->step()) !== false; $i++){
-	echo $i ." ".$slice."\n";
+	//echo $i ." ".$slice."\n";
+	
+	foreach($timeline as &$timeline_index){
+			
+		// Decrement any effects
+		$fiddlesticks_obj->tick($tick_rate);
+		$blue_sentinel_obj ->tick($tick_rate);
+		
+		if($timeline_index['status'] = 'queue' && $timeline_index['subject']->free() === true){
+			$timeline_index['subject']->$timeline_index['subject']['action']($timeline_index['subject']['object']);
+			$timeline_index['status'] = 'complete';
+		}
+	}
+	
 }
