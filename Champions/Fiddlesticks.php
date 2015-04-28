@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Champions;
 
-class SuperMinion extends \PerfectBuild\Champions\Champions{
+class Fiddlesticks extends \PerfectBuild\Champions\Champions{
 		
 	// Constructor
 	public function __construct($level, $spell_level_arr, $summoner_arr, $rune_arr, $masteries_arr) {		
@@ -27,7 +27,7 @@ class SuperMinion extends \PerfectBuild\Champions\Champions{
 		$this->attack_delay				= 0.0;
 		$this->base_armor				= 20.9;
 		$this->armor_per_level			= 3.5;
-		$this->base_magic_resist		= 30;
+		$this->base_magic_resistance	= 30;
 		$this->base_movement_speed		= 335;
 		
 		$this->spell_level_arr 			= $spell_level_arr;
@@ -42,6 +42,22 @@ class SuperMinion extends \PerfectBuild\Champions\Champions{
 	}
 
 	public function attack($mob_obj){
-		parent::attack($mob_obj);
+		return parent::attack($mob_obj);
+	}	
+	
+	public function spell1(){
+		
+	}
+	
+	public function spell2(){
+		
+	}
+	
+	public function spell3(){
+		
+	}
+	
+	public function spell4(){
+		
 	}	
 }

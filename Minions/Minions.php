@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Minions;
 
-Class Minions{
+abstract Class Minions{
 	
 	protected $gold;
 	protected $experience;

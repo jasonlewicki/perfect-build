@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Spells;
 
-Class Spells{
+abstract Class Spells{
 	
 	protected $name;
 	protected $level;
@@ -13,13 +13,7 @@ Class Spells{
 	protected $ad_ratio;
 	protected $bonus_ad_ratio;
 	protected $bonus_health_ratio;
-	protected $duration;
-	protected ;
-	protected ;
-	protected ;
-	protected ;
-	protected ;
-	
+	protected $duration;	
 		
 	public function __construct($name) {
 		$this->name = $name;

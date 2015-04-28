@@ -12,12 +12,4 @@ class Disable extends \PerfectBuild\Effects\Effects{
 				
 	}	
 	
-	public function tick($tick_rate){
-		$duration -= $tick_rate;
-		if($duration <= 0.0){
-			return Array('expire' => true);
-		}
-		return Array('expire' => false);
-	}	
-	
 }

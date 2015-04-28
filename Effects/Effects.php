@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Effects;
 
-Class Effects{
+abstract Class Effects{
 	
 	protected $name;
 	protected $duration;
@@ -10,7 +10,17 @@ Class Effects{
 	public function __construct($name) {
 		$this->name = $name;
 	}
+		
+	public function name() {
+		return $this->name;
+	}	
 	
-	abstract protected function tick();
+	public function tick($tick_rate){
+		$this->duration -= (1/$tick_rate);
+		if($this->duration <= 0.0){
+			return Array('expire' => true);
+		}
+		return Array('expire' => false);
+	}
 	
 }

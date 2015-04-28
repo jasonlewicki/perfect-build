@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Summoners;
 
-class Flash extends \PerfectBuild\Summoners\summoners{
+class Flash extends \PerfectBuild\Summoners\Summoners{
 		
 	// Constructor
 	public function __construct() {		

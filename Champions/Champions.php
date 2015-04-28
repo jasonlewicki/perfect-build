@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Champions;
 
-Class Champions{
+abstract Class Champions{
 	
 	protected $gold;
 	protected $level;
@@ -30,7 +30,7 @@ Class Champions{
 	protected $base_armor;
 	protected $armor_per_level;
 	
-	protected $base_magic_resist;
+	protected $base_magic_resistance;
 	
 	protected $base_movement_speed;
 	
@@ -50,6 +50,8 @@ Class Champions{
 		
 	public function __construct($summoner_arr, $rune_arr, $masteries_arr) {		
 		
+		$this->effects_arr = Array();
+		
 		$summoner1 = '\PerfectBuild\Summoners\\'.$summoner_arr[0];
 		$summoner2 = '\PerfectBuild\Summoners\\'.$summoner_arr[1];
 		
@@ -58,12 +60,18 @@ Class Champions{
 		
 	}
 	
-	abstract public function activateSpell1();
-	abstract public function activateSpell2();
-	abstract public function activateSpell3();
-	abstract public function activateSpell4();
-	abstract public function activateSummoner1();
-	abstract public function activateSummoner2();
+	abstract public function spell1();
+	abstract public function spell2();
+	abstract public function spell3();
+	abstract public function spell4();	
+	
+	public function summoner1(){
+		
+	}
+	
+	public function summoner2(){
+		
+	}
 	
 	public function attack($mob_obj){
 		
@@ -79,7 +87,7 @@ Class Champions{
 				'armor_penetration_flat' 			=> 0.0,
 				'armor_penetration_percent' 		=> 0.0,
 				'armor_reduction_flat' 				=> 0.0,
-				'armor_reduction_reduction'			=> 0.0,
+				'armor_reduction_percent'			=> 0.0,
 				'magic_resist_reduction_flat' 		=> 0.0,
 				'magic_resist_reduction_percent' 	=> 0.0,
 				'magic_resist_penetration_flat' 	=> 0.0,
@@ -134,10 +142,10 @@ Class Champions{
 	public function free(){
 		foreach($this->effects_arr as $effect){
 			if($effect->name() == "Disable"){
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}	
 	
 	public function armor(){	
@@ -167,10 +175,10 @@ Class Champions{
 	
 	public function tick($tick_rate){
 		// TODO: Fix this		
-		foreach($this->effects_arr as &$effect){
+		foreach($this->effects_arr as $key => &$effect){
 			$effects_arr = $effect->tick($tick_rate);
 			if($effects_arr['expire'] === true){
-				unset($effect);
+				unset($this->effects_arr[$key]);
 			}else{
 				
 			}

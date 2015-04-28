@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Masteries;
 
-Class Masteries{
+abstract Class Masteries{
 	
 	protected $name;
 		

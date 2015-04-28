@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-Class Monsters{
+abstract Class Monsters{
 	
 	protected $level;
 	protected $gold;
@@ -17,7 +17,11 @@ Class Monsters{
 	protected $spawn_time;
 	protected $respawn_time;
 	
+	protected $effects_arr;
+	
 	public function __construct() {
+		
+		$this->effects_arr = Array();
 		
 	}
 	
@@ -73,11 +77,23 @@ Class Monsters{
 	}	
 	
 	public function armor(){		
-		return $this->armor + ((1 - $this->level) * $this->armor_per_level);
+		return $this->armor;
 	}	
 	
 	public function magicResist(){		
-		return $this->magic_resist;
+		return $this->magic_resistance;
+	}	
+	
+	public function tick($tick_rate){
+		// TODO: Fix this		
+		foreach($this->effects_arr as &$effect){
+			$effects_arr = $effect->tick($tick_rate);
+			if($effects_arr['expire'] === true){
+				unset($effect);
+			}else{
+				
+			}
+		}
 	}	
 	
 }
