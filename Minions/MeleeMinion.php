@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Minions;
 
-class MeleeMinion extends \PerfectBuild\Minions\Minions{
+class MeleeMinion extends \PerfectBuild\Minions\Minion{
 		
 	// Constructor
 	public function __construct($second) {		

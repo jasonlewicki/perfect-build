@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class Cinderling extends \PerfectBuild\Monsters\Monsters{
+class Cinderling extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

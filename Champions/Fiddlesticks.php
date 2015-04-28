@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Champions;
 
-class Fiddlesticks extends \PerfectBuild\Champions\Champions{
+class Fiddlesticks extends \PerfectBuild\Champions\Champion{
 		
 	// Constructor
 	public function __construct($level, $spell_level_arr, $summoner_arr, $rune_arr, $masteries_arr) {		

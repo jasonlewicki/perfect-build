@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Effects;
 
-class Disable extends \PerfectBuild\Effects\Effects{
+class Disable extends \PerfectBuild\Effects\Effect{
 		
 	// Constructor
 	public function __construct($option_arr) {		

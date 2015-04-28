@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Champions;
 
-abstract Class Champions{
+abstract Class Champion{
 	
 	protected $gold;
 	protected $level;

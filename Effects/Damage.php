@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Effects;
 
-class Damage extends \PerfectBuild\Effects\Effects{
+class Damage extends \PerfectBuild\Effects\Effect{
 		
 	// Constructor
 	public function __construct($delay, $damage) {		

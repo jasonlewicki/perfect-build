@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Summoners;
 
-abstract Class Summoners{
+abstract Class Summoner{
 	
 	protected $name;
 		

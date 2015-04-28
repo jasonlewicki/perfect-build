@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Spells;
 
-class DarkWind extends \PerfectBuild\Spells\Spells{
+class DarkWind extends \PerfectBuild\Spells\Spell{
 		
 	// Constructor
 	public function __construct() {		

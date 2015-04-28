@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class Gromp extends \PerfectBuild\Monsters\Monsters{
+class Gromp extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

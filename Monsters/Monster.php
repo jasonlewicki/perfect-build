@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-abstract Class Monsters{
+abstract Class Monster{
 	
 	protected $level;
 	protected $gold;

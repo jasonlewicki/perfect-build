@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Spells;
 
-abstract Class Spells{
+abstract Class Spell{
 	
 	protected $name;
 	protected $level;

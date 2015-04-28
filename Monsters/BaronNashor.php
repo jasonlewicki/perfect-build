@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class BaronNashor extends \PerfectBuild\Monsters\Monsters{
+class BaronNashor extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level, $minute) {		

@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class CrimsonRaptor extends \PerfectBuild\Monsters\Monsters{
+class CrimsonRaptor extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

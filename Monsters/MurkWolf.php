@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class MurkWolf extends \PerfectBuild\Monsters\Monsters{
+class MurkWolf extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

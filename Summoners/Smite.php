@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Summoners;
 
-class Smite extends \PerfectBuild\Summoners\Summoners{
+class Smite extends \PerfectBuild\Summoners\Summoner{
 		
 	// Constructor
 	public function __construct() {		

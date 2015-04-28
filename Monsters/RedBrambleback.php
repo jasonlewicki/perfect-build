@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class RedBrambleback extends \PerfectBuild\Monsters\Monsters{
+class RedBrambleback extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

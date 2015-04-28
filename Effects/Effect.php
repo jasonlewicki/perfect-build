@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Effects;
 
-abstract Class Effects{
+abstract Class Effect{
 	
 	protected $name;
 	protected $duration;

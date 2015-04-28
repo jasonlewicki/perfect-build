@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Spells;
 
-class Terrify extends \PerfectBuild\Spells\Spells{
+class Terrify extends \PerfectBuild\Spells\Spell{
 		
 	// Constructor
 	public function __construct() {		

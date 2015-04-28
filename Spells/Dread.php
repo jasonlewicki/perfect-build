@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Spells;
 
-class Dread extends \PerfectBuild\Spells\Spells{
+class Dread extends \PerfectBuild\Spells\Spell{
 		
 	// Constructor
 	public function __construct() {		

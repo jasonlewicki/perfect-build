@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class BlueSentinel extends \PerfectBuild\Monsters\Monsters{
+class BlueSentinel extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

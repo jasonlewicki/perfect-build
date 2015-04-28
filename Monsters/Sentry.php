@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class Sentry extends \PerfectBuild\Monsters\Monsters{
+class Sentry extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class RiftScuttler extends \PerfectBuild\Monsters\Monsters{
+class RiftScuttler extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		

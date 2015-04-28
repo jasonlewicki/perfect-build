@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Spells;
 
-class Crowstorm extends \PerfectBuild\Spells\Spells{
+class Crowstorm extends \PerfectBuild\Spells\Spell{
 		
 	// Constructor
 	public function __construct() {		

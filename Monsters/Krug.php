@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Monsters;
 
-class Krug extends \PerfectBuild\Monsters\Monsters{
+class Krug extends \PerfectBuild\Monsters\Monster{
 		
 	// Constructor
 	public function __construct($level) {		
