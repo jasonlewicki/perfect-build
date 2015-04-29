@@ -6,6 +6,9 @@ abstract Class Spell{
 	
 	protected $name;
 	protected $level;
+	protected $range_arr;
+	
+	/*	
 	protected $is_channeled;
 	protected $has_passive;
 	protected $max_ranks;
@@ -13,11 +16,16 @@ abstract Class Spell{
 	protected $ad_ratio;
 	protected $bonus_ad_ratio;
 	protected $bonus_health_ratio;
-	protected $duration;	
+	protected $duration;
+	*/
+	
+	protected $effects_arr;
 		
 	public function __construct($name) {
 		$this->name = $name;
 	}
+	
+	abstract public function cast($caster_obj, $receiver_obj);
 	
 	public function level() {
 		if($this->level == $this->max_ranks){

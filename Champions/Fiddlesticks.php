@@ -45,19 +45,19 @@ class Fiddlesticks extends \PerfectBuild\Champions\Champion{
 		return parent::attack($mob_obj);
 	}	
 	
-	public function spell1(){
-		
+	public function spell1($mob_obj){
+		$this->spell1_obj->cast($this, $mob_obj);
 	}
 	
 	public function spell2(){
-		
+		$this->spell2_obj>cast($this, $mob_obj);		
 	}
 	
 	public function spell3(){
-		
+		$this->spell3_obj>cast($this, $mob_obj);		
 	}
 	
 	public function spell4(){
-		
+		$this->spell4_obj>cast($this, $mob_obj);		
 	}	
 }
