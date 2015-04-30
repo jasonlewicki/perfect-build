@@ -15,6 +15,8 @@ class Drain extends \PerfectBuild\Spells\Spell{
 		
 		// TODO: Need checks for mana availability and range
 		
+		$caster_obj->stats();
+		
 		$caster_obj->addEffect('Disable', Array('duration' => 5));
 		$receiver_obj->addEffect('Dread', Array('duration' => 5));
 		$receiver_obj->addEffect('Drain', Array('level' => $this->level));

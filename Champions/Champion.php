@@ -171,7 +171,48 @@ abstract Class Champion{
 			}
 		}
 		$this->effects_arr[] = new \PerfectBuild\Effects\Disable($option_arr);			
+	}	
+	
+	public function stats(){
+			
+		$stats_arr = Array(
+			'attack_damage' 					=> $this->base_attack_damage + ((1 - $this->level) * $this->attack_damage_per_level),
+			'armor_penetration_flat' 			=> 0.0,
+			'armor_penetration_percent' 		=> 0.0,
+			'armor_reduction_flat' 				=> 0.0,
+			'armor_reduction_percent'			=> 0.0,
+			'magic_resist_reduction_flat' 		=> 0.0,
+			'magic_resist_reduction_percent' 	=> 0.0,
+			'magic_resist_penetration_flat' 	=> 0.0,
+			'magic_resist_penetration_percent' 	=> 0.0,
+			'percent_health' 					=> 0.0
+		);
+			
+		// TODO: Fix this		
+		foreach($this->effects_arr as $effect){
+			if($effect->name() == "Armor Penetration Flat"){
+				$stats_arr['armor_penetration_flat'] = $effect->value();
+			}else if($effect->name() == "Armor Penetration Percent"){
+				$stats_arr['armor_penetration_percent'] = $effect->value();
+			}else if($effect->name() == "Armor Reduction Flat"){
+				$stats_arr['armor_reduction_flat'] = $effect->value();
+			}else if($effect->name() == "Armor Reduction Percent"){
+				$stats_arr['armor_reduction_percent'] = $effect->value();
+			}else if($effect->name() == "Magic Resist Reduction Flat"){
+				$stats_arr['magic_resist_reduction_flat'] = $effect->value();
+			}else if($effect->name() == "Magic Resist Reduction Percent"){
+				$stats_arr['magic_resist_reduction_percent'] = $effect->value();
+			}else if($effect->name() == "Magic Resist Penetration Flat "){
+				$stats_arr['magic_resist_penetration_flat'] = $effect->value();
+			}else if($effect->name() == "Magic Resist Penetration Percent"){
+				$stats_arr['magic_resist_penetration_percent'] = $effect->value();
+			}
+			
+		}
+		
+		$this->effects_arr[] = new \PerfectBuild\Effects\Disable($option_arr);			
 	}		
+		
 	
 	public function tick($tick_rate){
 		// TODO: Fix this		

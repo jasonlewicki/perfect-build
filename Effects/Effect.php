@@ -6,6 +6,7 @@ abstract Class Effect{
 	
 	protected $name;
 	protected $duration;
+	protected $value;
 		
 	public function __construct($name) {
 		$this->name = $name;
@@ -14,6 +15,10 @@ abstract Class Effect{
 	public function name() {
 		return $this->name;
 	}	
+		
+	public function value() {
+		return $this->value;
+	}
 	
 	public function tick($tick_rate){
 		$this->duration -= (1/$tick_rate);
