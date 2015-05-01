@@ -54,6 +54,7 @@ $total_damage = 0;
 
 // Step Engine's time
 for($i = 0; ($slice = $engine_obj->step()) !== false; $i++){
+	
 	//echo $i ." ".$slice."\n";	
 	
 	// Decrement any effects
