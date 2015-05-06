@@ -49,15 +49,15 @@ class Fiddlesticks extends \PerfectBuild\Champions\Champion{
 		$this->spell1_obj->cast($this, $mob_obj);
 	}
 	
-	public function spell2(){
+	public function spell2($mob_obj){
 		$this->spell2_obj>cast($this, $mob_obj);		
 	}
 	
-	public function spell3(){
+	public function spell3($mob_obj){
 		$this->spell3_obj>cast($this, $mob_obj);		
 	}
 	
-	public function spell4(){
+	public function spell4($mob_obj){
 		$this->spell4_obj>cast($this, $mob_obj);		
 	}	
 }

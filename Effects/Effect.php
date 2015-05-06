@@ -20,9 +20,9 @@ abstract Class Effect{
 		return $this->value;
 	}
 	
-	public function tick($tick_rate){
+	public function tick($tick_rate){		
 		$this->duration -= (1/$tick_rate);
-		if($this->duration <= 0.0){
+		if($this->duration < 0.0){
 			return Array('expire' => true);
 		}
 		return Array('expire' => false);

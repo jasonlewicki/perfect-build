@@ -58,8 +58,13 @@ for($i = 0; ($slice = $engine_obj->step()) !== false; $i++){
 	//echo $i ." ".$slice."\n";	
 	
 	// Decrement any effects
-	$fiddlesticks_obj->tick($tick_rate);
-	$blue_sentinel_obj ->tick($tick_rate);
+	$result = $fiddlesticks_obj->tick($tick_rate);
+	$damage_per_tick+= $result['total_damage'];
+	$total_damage += $result['total_damage'];
+	
+	$result = $blue_sentinel_obj ->tick($tick_rate);
+	$damage_per_tick+= $result['total_damage'];
+	$total_damage += $result['total_damage'];
 	
 	$complete = true;	
 	

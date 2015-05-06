@@ -5,6 +5,7 @@ namespace PerfectBuild\Spells;
 abstract Class Spell{
 	
 	protected $name;
+	protected $max_ranks;
 	protected $level;
 	protected $range_arr;
 	
