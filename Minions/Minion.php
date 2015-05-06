@@ -17,4 +17,6 @@ abstract Class Minion{
 	}
 	
 	
+	
+	
 }

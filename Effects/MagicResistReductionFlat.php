@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Effects;
 
-class MagicReductionFlat extends \PerfectBuild\Effects\Effect{
+class MagicResistReductionFlat extends \PerfectBuild\Effects\Effect{
 	
 	protected $interval;
 		

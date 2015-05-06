@@ -18,12 +18,15 @@ $blue_sentinel_level = 1;
 // Create a new instance of the Champion
 $fiddlesticks_obj = new \PerfectBuild\Champions\Fiddlesticks($fiddlesticks_level, $spell_level_arr, $summoner_arr, $rune_arr, $masteries_arr);
 
+// Level Drain 1 point
+$fiddlesticks_obj->levelSpell2();
+
 // Create a new instance of the Monster
 $blue_sentinel_obj = new \PerfectBuild\Monsters\BlueSentinel($blue_sentinel_level);
 
 // Create Timeline
 $timeline = Array(
-	0 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
+	0 => Array('subject' => $fiddlesticks_obj, 'action' => 'spell2', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
 	1 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
 	2 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),
 	3 => Array('subject' => $fiddlesticks_obj, 'action' => 'attack', 'object' => $blue_sentinel_obj, 'status' => 'queued'),

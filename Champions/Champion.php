@@ -65,6 +65,19 @@ abstract Class Champion{
 	abstract public function spell3($mob_obj);
 	abstract public function spell4($mob_obj);	
 	
+	public function levelSpell1(){
+		$this->spell1_obj->level();
+	}	
+	public function levelSpell2(){
+		$this->spell2_obj->level();
+	}
+	public function levelSpell3(){
+		$this->spell3_obj->level();
+	}
+	public function levelSpell4(){
+		$this->spell4_obj->level();
+	}
+	
 	public function summoner1(){
 		
 	}
@@ -79,7 +92,6 @@ abstract Class Champion{
 		
 		// Disable champion from other things while attacking
 		$this->addEffect('Disable', Array('duration' => $this->attackSpeed()));
-		
 		return $mob_obj->receiveDamage($this->base_attack_damage + ((1 - $this->level) * $this->attack_damage_per_level), 'armor', $this->stats());	
 			
 	}	
@@ -132,7 +144,7 @@ abstract Class Champion{
 		######
 		#TOTAL
 		######
-		$total_damage = $true_attack_damage + $true_magic_damage + $true_damage;	
+		$total_damage = $true_armor_damage + $true_magic_damage + $true_damage;	
 		$this->current_health -= $total_damage;
 		
 		return Array(
@@ -177,7 +189,10 @@ abstract Class Champion{
 				return;
 			}
 		}
-		$this->effects_arr[] = new \PerfectBuild\Effects\Disable($option_arr);
+		
+		$effect_name = "\PerfectBuild\Effects\\".$name;		
+		$this->effects_arr[] = new $effect_name($option_arr);
+		
 		return;			
 	}	
 	
@@ -216,6 +231,10 @@ abstract Class Champion{
 				$stats_arr['magic_resist_penetration_percent'] = $effect->value();
 			}
 			
+			else if($effect->name() == "Dread"){
+				$stats_arr['magic_resist_reduction_flat'] = 10;
+			}
+			
 		}
 		
 		return $stats_arr;			
@@ -227,7 +246,7 @@ abstract Class Champion{
 		
 		$damage_arr =  Array(
 			'total_damage' => 0,
-			'total_attack_damage' => 0,
+			'total_armor_damage' => 0,
 			'total_magic_damage' => 0,
 			'total_true_damage' => 0,
 		);	
