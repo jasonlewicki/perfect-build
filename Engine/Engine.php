@@ -15,11 +15,11 @@ Class Engine{
 	// Step the game by 1 tick
 	public function step(){
 			
-		$this->time += 1/$this->tick_rate;
+		//$this->time += 1/$this->tick_rate;
 		
 		// Engine Stuff	?
 			
-		return $this->time;
+		return $this->time++;
 		
 	}
 	

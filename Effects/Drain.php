@@ -19,7 +19,7 @@ class Drain extends \PerfectBuild\Effects\Effect{
 		$this->duration = 5;
 		$this->interval = 0.5;
 		
-		$this->level = $option_arr['level'];
+		$this->level = $option_arr['level'] - 1;
 		$this->caster_obj = $option_arr['caster_obj'];
 		$this->receiver_obj = $option_arr['receiver_obj'];
 		
@@ -31,15 +31,11 @@ class Drain extends \PerfectBuild\Effects\Effect{
 	
 	public function tick($tick_rate){
 		$effect_arr = Array();
-		
 		// Do Ability related effects
-		//if ($this->duration % $this->interval == 0){ Division by zero :(
-		$divide = $this->duration/$this->interval;
-		if( substr($divide,strpos($divide, '.') + 1)){
+		if ($this->time_elapsed % ($tick_rate*$this->interval) == 0){
 			$caster_stats = $this->caster_obj->stats();
-			$damage = $this->damage_arr[$this->level] + $caster_stats['ability_power'] * $this->ap_ratio;
-			
-			$this->receiver_obj->addEffect('Dread', Array('duration' => 2.5));			
+			$damage = ($this->damage_arr[$this->level] + $caster_stats['ability_power'] * $this->ap_ratio) * $this->interval;
+			$this->receiver_obj->addEffect('Dread', Array('duration' => 2.5));					
 			$effect_arr['damage_arr'] = $this->receiver_obj->receiveDamage($damage, 'magic', $caster_stats);
 			
 			// Need to heal still			

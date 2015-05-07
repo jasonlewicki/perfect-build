@@ -56,7 +56,9 @@ $damage_per_tick = 0;
 $total_damage = 0;
 
 // Step Engine's time
-for($i = 0; ($slice = $engine_obj->step()) !== false; $i++){
+while(($slice = $engine_obj->step()) !== false){
+	
+	$i = $slice/$tick_rate;
 	
 	//echo $i ." ".$slice."\n";	
 	
@@ -88,8 +90,8 @@ for($i = 0; ($slice = $engine_obj->step()) !== false; $i++){
 		}
 	}
 	
-	if($i % $tick_rate == 0 && $i > 0){		
-		echo "Total damage: ".$total_damage. "\tTotal DPS: ".(($total_damage/$i)*$tick_rate). "\tCurrent DPS: ".$damage_per_tick."\n";
+	if($slice % $tick_rate == 0 && $i > 0){
+		echo "Total damage: ".$total_damage. "\tTotal DPS: ".(($total_damage/($slice/$tick_rate))). "\tCurrent DPS: ".$damage_per_tick."\n";
 		$damage_per_tick = 0;
 	}
 	
@@ -101,4 +103,4 @@ for($i = 0; ($slice = $engine_obj->step()) !== false; $i++){
 
 // Last tidbit of tick that is not a full tick. There has to be a better way to do all of this
 $i--;
-echo "Total damage: ".$total_damage. "\tTotal DPS: ".(($total_damage/$i)*$tick_rate). "\tCurrent DPS: ".$damage_per_tick."\n";
+echo "Total damage: ".$total_damage. "\tTotal DPS: ".($total_damage/($slice/$tick_rate)). "\tCurrent DPS: ".$damage_per_tick."\n";

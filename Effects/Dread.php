@@ -19,8 +19,7 @@ class Dread extends \PerfectBuild\Effects\Effect{
 		
 		// Do Ability related effects
 		/*
-		$divide = $this->duration/$this->interval;
-		if( substr($divide,strpos($divide, '.') + 1)){
+		if ($this->time_elapsed % ($tick_rate*$this->interval) == 0){
 			$caster_stats = $this->caster_obj->stats();
 			$damage = $this->damage_arr[$this->level] + $caster_stats['ability_power'] * $this->ap_ratio;
 			
