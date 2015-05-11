@@ -27,6 +27,8 @@ class Drain extends \PerfectBuild\Effects\Effect{
 		$this->damage_arr = Array(60,90,120,150,180);
 		$this->heal_arr = Array(0.60,0.65,0.70,0.75,0.80);
 		
+		$this->unique = false;
+		
 	}	
 	
 	public function tick($tick_rate){
@@ -35,7 +37,7 @@ class Drain extends \PerfectBuild\Effects\Effect{
 		if ($this->time_elapsed % ($tick_rate*$this->interval) == 0){
 			$caster_stats = $this->caster_obj->stats();
 			$damage = ($this->damage_arr[$this->level] + $caster_stats['ability_power'] * $this->ap_ratio) * $this->interval;
-			$this->receiver_obj->addEffect('Dread', Array('duration' => 2.5));					
+			$this->receiver_obj->addEffect('Dread', Array('duration' => 2.5));	
 			$effect_arr['damage_arr'] = $this->receiver_obj->receiveDamage($damage, 'magic', $caster_stats);
 			
 			// Need to heal still			

@@ -11,6 +11,8 @@ class Dread extends \PerfectBuild\Effects\Effect{
 		parent::__construct("Drain");	
 		
 		$this->duration = $option_arr['duration'];
+		$this->basic_effects_arr['self_magic_resist_reduction_flat'] = 10;
+		$this->unique = true;
 		
 	}	
 	

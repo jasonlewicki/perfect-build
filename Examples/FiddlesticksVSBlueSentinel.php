@@ -102,5 +102,4 @@ while(($slice = $engine_obj->step()) !== false){
 }
 
 // Last tidbit of tick that is not a full tick. There has to be a better way to do all of this
-$i--;
 echo "Total damage: ".$total_damage. "\tTotal DPS: ".($total_damage/($slice/$tick_rate)). "\tCurrent DPS: ".$damage_per_tick."\n";

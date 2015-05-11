@@ -7,11 +7,14 @@ abstract Class Effect{
 	protected $name;
 	protected $time_elapsed;
 	protected $duration;
-	protected $value;
+	protected $basic_effects_arr;
+	protected $unique;
 		
 	public function __construct($name) {
 		$this->name = $name;
 		$this->time_elapsed = 0;
+		$this->basic_effects_arr = Array();
+		$this->unique = false;
 	}
 		
 	public function name() {
@@ -20,6 +23,10 @@ abstract Class Effect{
 		
 	public function value() {
 		return $this->value;
+	}
+		
+	public function basicEffectsArr() {
+		return $this->basic_effects_arr;
 	}
 	
 	public function tick($tick_rate){

@@ -121,7 +121,7 @@ abstract Class Monster{
 	public function stats(){
 			
 		$stats_arr = Array(
-			'attack_damage'						=> $this->base_attack_damage + ((1 - $this->level) * $this->attack_damage_per_level),
+			'attack_damage'						=> $this->attack_damage,
 			'ability_power'						=> 0.0,
 			'armor_penetration_flat' 			=> 0.0,
 			'armor_penetration_percent' 		=> 0.0,
@@ -130,33 +130,41 @@ abstract Class Monster{
 			'magic_resist_reduction_flat' 		=> 0.0,
 			'magic_resist_reduction_percent' 	=> 0.0,
 			'magic_resist_penetration_flat' 	=> 0.0,
-			'magic_resist_penetration_percent' 	=> 0.0
+			'magic_resist_penetration_percent' 	=> 0.0,
+			'magic_resist' 						=> $this->magic_resistance,
+			'armor' 							=> $this->armor
 		);
 			
 		// TODO: Fix this		
 		foreach($this->effects_arr as $effect){
-			if($effect->name() == "Armor Penetration Flat"){
-				$stats_arr['armor_penetration_flat'] = $effect->value();
-			}else if($effect->name() == "Armor Penetration Percent"){
-				$stats_arr['armor_penetration_percent'] = $effect->value();
-			}else if($effect->name() == "Armor Reduction Flat"){
-				$stats_arr['armor_reduction_flat'] = $effect->value();
-			}else if($effect->name() == "Armor Reduction Percent"){
-				$stats_arr['armor_reduction_percent'] = $effect->value();
-			}else if($effect->name() == "Magic Resist Reduction Flat"){
-				$stats_arr['magic_resist_reduction_flat'] = $effect->value();
-			}else if($effect->name() == "Magic Resist Reduction Percent"){
-				$stats_arr['magic_resist_reduction_percent'] = $effect->value();
-			}else if($effect->name() == "Magic Resist Penetration Flat "){
-				$stats_arr['magic_resist_penetration_flat'] = $effect->value();
-			}else if($effect->name() == "Magic Resist Penetration Percent"){
-				$stats_arr['magic_resist_penetration_percent'] = $effect->value();
-			}
 			
-			else if($effect->name() == "Dread"){
-				$stats_arr['magic_resist_reduction_flat'] = 10;
-			}
+			$basic_effects_arr = $effect->basicEffectsArr();
 			
+			if(!empty($basic_effects_arr)){
+				foreach($basic_effects_arr as $basic_effect_key => $basic_effect_value){
+					if($basic_effect_key == "armor_penetration_flat"){
+						$stats_arr['armor_penetration_flat'] = $basic_effect_value;
+					}else if($basic_effect_key == "armor_penetration_percent"){
+						$stats_arr['armor_penetration_percent'] = $basic_effect_value;
+					}else if($basic_effect_key == "armor_reduction_flat"){
+						$stats_arr['armor_reduction_flat'] = $basic_effect_value;
+					}else if($basic_effect_key == "armor_reduction_percent"){
+						$stats_arr['armor_reduction_percent'] = $basic_effect_value;
+					}else if($basic_effect_key == "magic_resist_reduction_flat"){
+						$stats_arr['magic_resist_reduction_flat'] = $basic_effect_value;
+					}else if($basic_effect_key == "magic_resist_reduction_percent"){
+						$stats_arr['magic_resist_reduction_percent'] = $basic_effect_value;
+					}else if($basic_effect_key == "magic_resist_penetration_flat"){
+						$stats_arr['magic_resist_penetration_flat'] = $basic_effect_value;
+					}else if($basic_effect_key == "magic_resist_penetration_percent"){
+						$stats_arr['magic_resist_penetration_percent'] = $basic_effect_value;
+					}
+					
+					else if($basic_effect_key == "self_magic_resist_penetration_percent"){
+						$stats_arr['magic_resist'] -= $basic_effect_value;
+					}
+				}
+			}			
 		}
 		
 		return $stats_arr;			
