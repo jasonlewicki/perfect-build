@@ -59,9 +59,7 @@ $total_damage = 0;
 while(($slice = $engine_obj->step()) !== false){
 	
 	$i = $slice/$tick_rate;
-	
-	//echo $i ." ".$slice."\n";	
-	
+		
 	// Decrement any effects
 	$result = $fiddlesticks_obj->tick($tick_rate);
 	$damage_per_tick+= $result['total_damage'];
