@@ -65,6 +65,7 @@ while(($slice = $engine_obj->step()) !== false){
 	$damage_per_tick+= $result['total_damage'];
 	$total_damage += $result['total_damage'];
 	
+	// Decrement any effects
 	$result = $blue_sentinel_obj ->tick($tick_rate);
 	$damage_per_tick+= $result['total_damage'];
 	$total_damage += $result['total_damage'];
