@@ -23,7 +23,7 @@ Class Engine{
 		
 	}
 	
-	// return tick rate
+	// Return tick rate
 	public function tickRate(){		
 		return $this->tick_rate;		
 	}
