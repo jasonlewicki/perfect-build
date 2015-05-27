@@ -106,15 +106,16 @@ abstract Class Champion{
 		
 		######
 		#ARMOR
-		######
-		
-		// Combine auras and effects on target with the person attacking
-		$armor_reduction_flat = $attacker_stats['armor_reduction_flat'] + $stats_arr['self_armor_reduction_flat'];
-		$armor_reduction_percent = ($attacker_stats['armor_reduction_percent'] || $stats_arr['self_armor_reduction_percent']) == 0.0 ? ($attacker_stats['armor_reduction_percent'] + $stats_arr['self_armor_reduction_percent']) : ($attacker_stats['armor_reduction_percent'] * $stats_arr['self_armor_reduction_percent']);
-		$armor_penetration_percent = ($attacker_stats['armor_penetration_percent'] || $stats_arr['self_armor_penetration_percent']) == 0.0 ? ($attacker_stats['armor_penetration_percent'] + $stats_arr['self_armor_penetration_percent']) : ($attacker_stats['armor_penetration_percent'] * $stats_arr['self_armor_penetration_percent']);
-		$armor_penetration_flat = $attacker_stats['armor_penetration_flat'] + $stats_arr['self_armor_penetration_flat'];
+		######		
 		
 		if($damage_type == 'armor'){
+			
+			// Combine auras and effects on target with the person attacking
+			$armor_reduction_flat = $attacker_stats['armor_reduction_flat'] + $stats_arr['self_armor_reduction_flat'];
+			$armor_reduction_percent = ($attacker_stats['armor_reduction_percent'] || $stats_arr['self_armor_reduction_percent']) == 0.0 ? ($attacker_stats['armor_reduction_percent'] + $stats_arr['self_armor_reduction_percent']) : ($attacker_stats['armor_reduction_percent'] * $stats_arr['self_armor_reduction_percent']);
+			$armor_penetration_percent = ($attacker_stats['armor_penetration_percent'] || $stats_arr['self_armor_penetration_percent']) == 0.0 ? ($attacker_stats['armor_penetration_percent'] + $stats_arr['self_armor_penetration_percent']) : ($attacker_stats['armor_penetration_percent'] * $stats_arr['self_armor_penetration_percent']);
+			$armor_penetration_flat = $attacker_stats['armor_penetration_flat'] + $stats_arr['self_armor_penetration_flat'];
+					
 			// Calculate Armor after reductions and penetrations	
 			$armor_calc_part_1 = $stats_arr['armor'] - $armor_reduction_flat;			
 			$armor_calc_part_2 = $armor_calc_part_1 * (1 - $armor_reduction_percent);					
@@ -140,16 +141,16 @@ abstract Class Champion{
 		
 		######
 		#MAGIC
-		######	
-		
-		// Combine auras and effects on target with the person attacking
-		$magic_resistance_reduction_flat = $attacker_stats['magic_resistance_reduction_flat'] + $stats_arr['self_magic_resistance_reduction_flat'];
-		$magic_resistance_reduction_percent = ($attacker_stats['magic_resistance_reduction_percent'] || $stats_arr['self_magic_resistance_reduction_percent']) == 0.0 ? ($attacker_stats['magic_resistance_reduction_percent'] + $stats_arr['self_magic_resistance_reduction_percent']) : ($attacker_stats['magic_resistance_reduction_percent'] * $stats_arr['self_magic_resistance_reduction_percent']);
-		$magic_resistance_penetration_percent = ($attacker_stats['magic_resistance_penetration_percent'] || $stats_arr['self_magic_resistance_penetration_percent']) == 0.0 ? ($attacker_stats['magic_resistance_penetration_percent'] + $stats_arr['self_magic_resistance_penetration_percent']) : ($attacker_stats['magic_resistance_penetration_percent'] * $stats_arr['self_magic_resistance_penetration_percent']);
-		$magic_resistance_penetration_flat = $attacker_stats['magic_resistance_penetration_flat'] + $stats_arr['self_magic_resistance_penetration_flat'];
-		
-			
+		######		
+					
 		if($damage_type == 'magic'){
+			
+			// Combine auras and effects on target with the person attacking
+			$magic_resistance_reduction_flat = $attacker_stats['magic_resistance_reduction_flat'] + $stats_arr['self_magic_resistance_reduction_flat'];
+			$magic_resistance_reduction_percent = ($attacker_stats['magic_resistance_reduction_percent'] || $stats_arr['self_magic_resistance_reduction_percent']) == 0.0 ? ($attacker_stats['magic_resistance_reduction_percent'] + $stats_arr['self_magic_resistance_reduction_percent']) : ($attacker_stats['magic_resistance_reduction_percent'] * $stats_arr['self_magic_resistance_reduction_percent']);
+			$magic_resistance_penetration_percent = ($attacker_stats['magic_resistance_penetration_percent'] || $stats_arr['self_magic_resistance_penetration_percent']) == 0.0 ? ($attacker_stats['magic_resistance_penetration_percent'] + $stats_arr['self_magic_resistance_penetration_percent']) : ($attacker_stats['magic_resistance_penetration_percent'] * $stats_arr['self_magic_resistance_penetration_percent']);
+			$magic_resistance_penetration_flat = $attacker_stats['magic_resistance_penetration_flat'] + $stats_arr['self_magic_resistance_penetration_flat'];
+			
 			// Calculate Magic Resist after reductions and penetrations
 			$magic_resistance_calc_part_1 = $stats_arr['magic_resistance'] - $magic_resistance_reduction_flat;			
 			$magic_resistance_calc_part_2 = $magic_resistance_calc_part_1 * (1 - $magic_resistance_reduction_percent);					
@@ -210,15 +211,17 @@ abstract Class Champion{
 	
 	public function addEffect($name, $option_arr){
 		// TODO: Fix this		
-		foreach($this->effects_arr as $key => $effect){
-			if($effect->name() == "Disable"){
-				throw new \Exception("Add Disable Effect Error.");
-			}else if($effect->name() == $name){
-				$this->effects_arr[$key] = new \PerfectBuild\Effects\Disable($option_arr);	
-				return;
+		foreach($this->effects_arr as $key => $effect){ 
+			if($effect->name() == $name){
+				if($effect->isUnique()){
+					$effect_name = "\PerfectBuild\Effects\\".$name;		
+					$this->effects_arr[$key] = new $effect_name($option_arr);	
+					return;					
+				}else{
+					break;
+				}
 			}
 		}
-		
 		$effect_name = "\PerfectBuild\Effects\\".$name;		
 		$this->effects_arr[] = new $effect_name($option_arr);
 		
@@ -288,13 +291,13 @@ abstract Class Champion{
 						$stats_arr['self_armor_reduction_flat'] += $basic_effect_value;
 					}else if($basic_effect_key == "self_armor_reduction_percent"){
 						$stats_arr['self_armor_reduction_percent'] = $stats_arr['self_armor_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_armor_reduction_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_penetration_percent"){
-						$stats_arr['self_magic_resistance_reduction_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_penetration_flat"){
-						$stats_arr['self_magic_resistance_reduction_percent'] = $stats_arr['self_magic_resistance_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_reduction_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_reduction_percent"){
-						$stats_arr['self_magic_resistance_penetration_flat'] += $basic_effect_value;
 					}else if($basic_effect_key == "self_magic_resistance_reduction_flat"){
+						$stats_arr['self_magic_resistance_reduction_flat'] += $basic_effect_value;
+					}else if($basic_effect_key == "self_magic_resistance_reduction_percent"){
+						$stats_arr['self_magic_resistance_reduction_percent'] = $stats_arr['self_magic_resistance_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_reduction_percent'] * $basic_effect_value;
+					}else if($basic_effect_key == "self_magic_resistance_penetration_flat"){
+						$stats_arr['self_magic_resistance_penetration_flat'] += $basic_effect_value;
+					}else if($basic_effect_key == "self_magic_resistance_penetration_percent"){
 						$stats_arr['self_magic_resistance_penetration_percent'] = $stats_arr['self_magic_resistance_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_penetration_percent'] * $basic_effect_value;
 					}
 				}
@@ -302,10 +305,10 @@ abstract Class Champion{
 		}
 			
 		// Calculate Armor after reductions and penetrations		
-		$stats_arr['armor'] = (($stats_arr['armor'] - $stats_arr['self_armor_reduction_flat']) * (1 - $stats_arr['self_armor_reduction_percent']) * (1 - $stats_arr['self_armor_penetration_percent'])) - $stats_arr['self_armor_penetration_flat'];
+		//$stats_arr['armor'] = (($stats_arr['armor'] - $stats_arr['self_armor_reduction_flat']) * (1 - $stats_arr['self_armor_reduction_percent']) * (1 - $stats_arr['self_armor_penetration_percent'])) - $stats_arr['self_armor_penetration_flat'];
 			
 		// Calculate Magic Resist after reductions and penetrations
-		$stats_arr['magic_resistance'] = (($stats_arr['magic_resistance'] - $stats_arr['self_magic_resistance_reduction_flat']) * (1 - $stats_arr['self_magic_resistance_reduction_percent']) * (1 - $stats_arr['self_magic_resistance_penetration_percent'])) - $stats_arr['self_magic_resistance_penetration_flat'];
+		//$stats_arr['magic_resistance'] = (($stats_arr['magic_resistance'] - $stats_arr['self_magic_resistance_reduction_flat']) * (1 - $stats_arr['self_magic_resistance_reduction_percent']) * (1 - $stats_arr['self_magic_resistance_penetration_percent'])) - $stats_arr['self_magic_resistance_penetration_flat'];
 			
 		return $stats_arr;			
 	}		

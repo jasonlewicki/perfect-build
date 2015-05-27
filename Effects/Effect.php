@@ -12,7 +12,7 @@ abstract Class Effect{
 		
 	public function __construct($name) {
 		$this->name = $name;
-		$this->time_elapsed = 0;
+		$this->time_elapsed = 0.0;
 		$this->basic_effects_arr = Array();
 		$this->unique = false;
 	}
