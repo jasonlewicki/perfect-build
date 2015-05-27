@@ -29,6 +29,10 @@ abstract Class Effect{
 		return $this->basic_effects_arr;
 	}
 	
+	public function isUnique() {
+		return $this->unique;
+	}
+	
 	public function tick($tick_rate){
 		$this->time_elapsed++;
 		if(($this->duration*$tick_rate) - $this->time_elapsed < 0.0){

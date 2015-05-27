@@ -8,7 +8,7 @@ class Dread extends \PerfectBuild\Effects\Effect{
 		
 	// Constructor
 	public function __construct($option_arr) {		
-		parent::__construct("Drain");	
+		parent::__construct("Dread");	
 		
 		$this->duration = $option_arr['duration'];
 		$this->basic_effects_arr['self_magic_resist_reduction_flat'] = 10;
