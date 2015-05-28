@@ -20,11 +20,7 @@ abstract Class Effect{
 	public function name() {
 		return $this->name;
 	}	
-		
-	public function value() {
-		return $this->value;
-	}
-		
+	
 	public function basicEffectsArr() {
 		return $this->basic_effects_arr;
 	}
@@ -34,6 +30,12 @@ abstract Class Effect{
 	}
 	
 	public function tick($tick_rate){
+		
+		// Infinite effects
+		if ($this->duration === false){
+			return Array('expire' => false);
+		}
+		
 		$this->time_elapsed++;
 		if(($this->duration*$tick_rate) - $this->time_elapsed < 0.0){
 			return Array('expire' => true);

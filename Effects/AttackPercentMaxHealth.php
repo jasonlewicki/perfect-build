@@ -11,8 +11,8 @@ class AttackPercentMaxHealth extends \PerfectBuild\Effects\Effect{
 		parent::__construct("Attack Percent Max Health");	
 		
 		$this->duration = $option_arr['duration'];
-		$this->interval = NULL;
-		$this->value = $option_arr['value'];
+		$this->basic_effects_arr['armor_percent_max_health'] = $option_arr['value'];
+		$this->unique = false;
 		
 	}	
 	

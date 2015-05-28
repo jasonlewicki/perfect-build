@@ -11,9 +11,8 @@ class MagicPercentCurrentHealth extends \PerfectBuild\Effects\Effect{
 		parent::__construct("Magic Percent Current Health");	
 		
 		$this->duration = $option_arr['duration'];
-		$this->interval = NULL;
-		$this->value = $option_arr['value'];
-		
+		$this->basic_effects_arr['magic_percent_current_health'] = $option_arr['value'];
+		$this->unique = false;
 	}	
 	
 }

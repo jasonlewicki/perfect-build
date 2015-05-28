@@ -11,8 +11,8 @@ class AttackPercentCurrentHealth extends \PerfectBuild\Effects\Effect{
 		parent::__construct("Attack Percent Current Health");	
 		
 		$this->duration = $option_arr['duration'];
-		$this->interval = NULL;
-		$this->value = $option_arr['value'];
+		$this->basic_effects_arr['attack_percent_current_health'] = $option_arr['value'];
+		$this->unique = false;
 		
 	}	
 	

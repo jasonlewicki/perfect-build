@@ -2,17 +2,17 @@
 
 namespace PerfectBuild\Effects;
 
-class ArmorReductionPercent extends \PerfectBuild\Effects\Effect{
+class ArmorReductionFlat extends \PerfectBuild\Effects\Effect{
 	
 	protected $interval;
 		
 	// Constructor
 	public function __construct($option_arr) {		
-		parent::__construct("Armor Reduction Percent");	
+		parent::__construct("Armor Reduction Flat");	
 		
 		$this->duration = $option_arr['duration'];
-		$this->interval = NULL;
-		$this->value = $option_arr['value'];
+		$this->basic_effects_arr['armor_reduction_flat'] = $option_arr['value'];
+		$this->unique = false;
 		
 	}	
 	
