@@ -7,6 +7,6 @@ class Experience extends \PerfectBuild\Runes\Rune{
 	// Constructor
 	public function __construct($mob_obj) {		
 		parent::__construct('Experience');						
-		$this->basic_effects_arr['experience'] = 2.0;		
+		$this->basic_effects_arr['experience'] = 0.02;		
 	}
 }
