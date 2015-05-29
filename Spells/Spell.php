@@ -8,6 +8,7 @@ abstract Class Spell{
 	protected $max_ranks;
 	protected $level;
 	protected $range_arr;
+	protected $cooldown_arr;
 	
 	/*	
 	protected $is_channeled;
@@ -30,11 +31,16 @@ abstract Class Spell{
 	
 	public function level() {
 		if($this->level == $this->max_ranks){
-			throw new Exception('Max Rank Exception');
+			throw new \Exception('Max Rank Exception');
 		}
 		
 		$this->level++;
 		return;
+	}
+	
+	// Is the spell available to be cast?
+	public function free() {
+		
 	}
 	
 }

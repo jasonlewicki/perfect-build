@@ -10,7 +10,46 @@ $engine_obj = new \PerfectBuild\Engine\Engine();
 $fiddlesticks_level = 1;
 $spell_level_arr = Array(0,1,0,0);
 $summoner_arr = Array('Flash', 'Smite');
-$rune_arr = Array();
+$rune_arr = Array(
+	'Glyphs' => Array(
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower'
+	),
+	'Marks' => Array(
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+		'MagicPenetration',
+	),
+	'Quintessences' => Array(
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower'
+	),
+	'Seals' => Array(
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+		'AbilityPower',
+	)
+);
 $masteries_arr = Array();
 
 $blue_sentinel_level = 1;

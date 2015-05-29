@@ -8,7 +8,8 @@ class Drain extends \PerfectBuild\Spells\Spell{
 	public function __construct() {		
 		parent::__construct("Drain");
 		$this->max_ranks = 5;
-		$this->range_arr = Array(650,650,650,650,650);			
+		$this->range_arr = Array(650,650,650,650,650);	
+		$this->cooldown_arr = Array(10,9,8,7,6);			
 	}
 	
 	public function cast($caster_obj, $receiver_obj){

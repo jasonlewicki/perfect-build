@@ -69,9 +69,12 @@ abstract Class Champion{
 		// Runes
 		foreach($rune_arr as $rune_type => $rune_type_arr){
 			foreach($rune_type_arr as $rune_name){
-				$rune_object_name = "\PerfectBuild\Runes\{$rune_type}\{$rune_name}";
-				$this->rune_arr[$rune_type] = new $rune_object_name;
+				$rune_object_name = "\PerfectBuild\Runes\\{$rune_type}\\{$rune_name}";
+				$this->rune_arr[$rune_type][] = new $rune_object_name;
 			} 
+		}
+		if(count($this->rune_arr['Glyphs']) > 9 || count($this->rune_arr['Marks']) > 9 || count($this->rune_arr['Quintessences']) > 3 || count($this->rune_arr['Seals']) > 9 ){
+			throw new \Exception('Rune Count Exeception');
 		}
 	
 		// Masteries
@@ -297,133 +300,140 @@ abstract Class Champion{
 			'self_magic_resistance_penetration_flat' 	=> 0.0,
 			'self_magic_resistance_penetration_percent'	=> 0.0,
 		);
-			
-		// TODO: Fix this		
-		foreach($this->effects_arr as $effect){
-			$basic_effects_arr = $effect->basicEffectsArr();
-			
-			if(!empty($basic_effects_arr)){
-				foreach($basic_effects_arr as $basic_effect_key => $basic_effect_value){
-					# Outgoing effects					
-					if($basic_effect_key == "armor_penetration_flat"){
-						$stats_arr['armor_penetration_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "armor_penetration_percent"){
-						$stats_arr['armor_penetration_percent'] = $stats_arr['armor_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['armor_penetration_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "armor_reduction_flat"){
-						$stats_arr['armor_reduction_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "armor_reduction_percent"){
-						$stats_arr['armor_reduction_percent'] = $stats_arr['armor_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['armor_reduction_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "magic_resistance_reduction_flat"){
-						$stats_arr['magic_resistance_reduction_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "magic_resistance_reduction_percent"){
-						$stats_arr['magic_resistance_reduction_percent'] = $stats_arr['magic_resistance_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['magic_resistance_reduction_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "magic_resistance_penetration_flat"){
-						$stats_arr['magic_resistance_penetration_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "magic_resistance_penetration_percent"){
-						$stats_arr['magic_resistance_penetration_percent'] = $stats_arr['magic_resistance_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['magic_resistance_penetration_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "ability_power"){
-						$stats_arr['ability_power'] += $basic_effect_value;
-					}else if($basic_effect_key == "ability_power_scaling"){
-						$stats_arr['ability_power'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "armor"){
-						$stats_arr['armor'] += $basic_effect_value;
-					}else if($basic_effect_key == "armor_scaling"){
-						$stats_arr['armor_scaling'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "attack_damage"){
-						$stats_arr['bonus_attack_damage'] += $basic_effect_value;
-						$stats_arr['attack_damage'] = $stats_arr['base_attack_damage'] + $stats_arr['bonus_attack_damage'];
-					}else if($basic_effect_key == "attack_damage_scaling"){
-						$stats_arr['bonus_attack_damage'] += $basic_effect_value * $this->level;
-						$stats_arr['attack_damage'] = $stats_arr['base_attack_damage'] + $stats_arr['bonus_attack_damage'];
-					}else if($basic_effect_key == "attack_speed_percent"){
-						$stats_arr['bonus_attack_speed'] += $basic_effect_value;
-						$stats_arr['attack_speed'] = $stats_arr['base_attack_speed'] * (1 + $stats_arr['bonus_attack_speed']);
-					}else if($basic_effect_key == "cooldown_reduction_percent"){
-						$stats_arr['cooldown_reduction'] += $basic_effect_value;
-					}else if($basic_effect_key == "cooldown_reduction_scaling_percent"){
-						$stats_arr['cooldown_reduction'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "critical_chance_percent"){
-						$stats_arr['critical_chance_percent'] += $basic_effect_value;
-					}else if($basic_effect_key == "critical_damage_percent"){
-						$stats_arr['critical_damage_percent'] += $basic_effect_value;
-					}else if($basic_effect_key == "energy"){
-						$stats_arr['energy'] += $basic_effect_value;
-					}else if($basic_effect_key == "energy_regeneration_per_5"){
-						$stats_arr['energy_regeneration_per_5'] += $basic_effect_value;
-					}else if($basic_effect_key == "experience_percent"){
-						$stats_arr['experience_percent'] += $basic_effect_value;
-					}else if($basic_effect_key == "gold_per_10"){
-						$stats_arr['gold_per_10'] += $basic_effect_value;
-					}else if($basic_effect_key == "health"){
-						$stats_arr['bonus_health'] += $basic_effect_value;
-						$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
-					}else if($basic_effect_key == "health_percent"){
-						$stats_arr['bonus_health_percent'] += $basic_effect_value;
-						$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
-					}else if($basic_effect_key == "health_regeneration_per_5"){
-						$stats_arr['health_regeneration_per_5'] += $basic_effect_value;
-					}else if($basic_effect_key == "health_regeneration_scaling_per_5"){
-						$stats_arr['health_regeneration_per_5'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "health_scaling"){
-						$stats_arr['bonus_health'] += $basic_effect_value * $this->level;
-						$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
-					}else if($basic_effect_key == "lifesteal_percent"){
-						$stats_arr['lifesteal_percent'] += $basic_effect_value;
-					}else if($basic_effect_key == "magic_resistance"){
-						$stats_arr['magic_resistance'] += $basic_effect_value;
-					}else if($basic_effect_key == "magic_resistance_scaling"){
-						$stats_arr['magic_resistance'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "mana"){
-						$stats_arr['mana'] += $basic_effect_value;
-					}else if($basic_effect_key == "mana_scaling"){
-						$stats_arr['mana'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "mana_regeneration_per_5"){
-						$stats_arr['mana_regeneration_per_5'] += $basic_effect_value;
-					}else if($basic_effect_key == "mana_regeneration_scaling_per_5"){
-						$stats_arr['mana_regeneration_per_5'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "mana_scaling"){
-						$stats_arr['mana'] += $basic_effect_value * $this->level;
-					}else if($basic_effect_key == "movement_speed_percent"){
-						$stats_arr['bonus_movement_speed_percent'] += $basic_effect_value;
-					}else if($basic_effect_key == "movement_speed_flat"){
-						$stats_arr['bonus_movement_speed_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "revival"){
-						$stats_arr['revival_percent'] += $basic_effect_value;
-					}else if($basic_effect_key == "spell_vamp_percent"){
-						$stats_arr['spell_vamp_percent'] += $basic_effect_value;
-					}					
 					
-					# Incoming effects
-					else if($basic_effect_key == "self_armor_penetration_flat"){
-						$stats_arr['self_armor_penetration_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "self_armor_penetration_percent"){
-						$stats_arr['self_armor_penetration_percent'] = $stats_arr['self_armor_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['self_armor_penetration_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "self_armor_reduction_flat"){
-						$stats_arr['self_armor_reduction_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "self_armor_reduction_percent"){
-						$stats_arr['self_armor_reduction_percent'] = $stats_arr['self_armor_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_armor_reduction_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_reduction_flat"){
-						$stats_arr['self_magic_resistance_reduction_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_reduction_percent"){
-						$stats_arr['self_magic_resistance_reduction_percent'] = $stats_arr['self_magic_resistance_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_reduction_percent'] * $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_penetration_flat"){
-						$stats_arr['self_magic_resistance_penetration_flat'] += $basic_effect_value;
-					}else if($basic_effect_key == "self_magic_resistance_penetration_percent"){
-						$stats_arr['self_magic_resistance_penetration_percent'] = $stats_arr['self_magic_resistance_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_penetration_percent'] * $basic_effect_value;
-					}
-				}
-			}			
+		// Runes
+		foreach($this->rune_arr as $rune_type_arr){
+			foreach($rune_type_arr as $rune_obj){				
+				$stats_arr = $this->addStats($stats_arr, $rune_obj->basicEffectsArr());
+			} 
 		}
-			
-		// Calculate Armor after reductions and penetrations		
-		//$stats_arr['armor'] = (($stats_arr['armor'] - $stats_arr['self_armor_reduction_flat']) * (1 - $stats_arr['self_armor_reduction_percent']) * (1 - $stats_arr['self_armor_penetration_percent'])) - $stats_arr['self_armor_penetration_flat'];
-			
-		// Calculate Magic Resist after reductions and penetrations
-		//$stats_arr['magic_resistance'] = (($stats_arr['magic_resistance'] - $stats_arr['self_magic_resistance_reduction_flat']) * (1 - $stats_arr['self_magic_resistance_reduction_percent']) * (1 - $stats_arr['self_magic_resistance_penetration_percent'])) - $stats_arr['self_magic_resistance_penetration_flat'];
-			
-		return $stats_arr;			
-	}		
 		
+		// Masteries
+		// TODO: Masteries
+		
+		// Spell/Ability Effects	
+		foreach($this->effects_arr as $effect_obj){	
+			$stats_arr = $this->addStats($stats_arr, $effect_obj->basicEffectsArr());
+		}
+	
+		return $stats_arr;			
+	}	
+
+	private function addStats($stats_arr, $basic_effects_arr){
+		if(!empty($basic_effects_arr)){
+			foreach($basic_effects_arr as $basic_effect_key => $basic_effect_value){
+						
+				# Outgoing effects					
+				if($basic_effect_key == "armor_penetration_flat"){
+					$stats_arr['armor_penetration_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "armor_penetration_percent"){
+					$stats_arr['armor_penetration_percent'] = $stats_arr['armor_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['armor_penetration_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "armor_reduction_flat"){
+					$stats_arr['armor_reduction_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "armor_reduction_percent"){
+					$stats_arr['armor_reduction_percent'] = $stats_arr['armor_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['armor_reduction_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "magic_resistance_reduction_flat"){
+					$stats_arr['magic_resistance_reduction_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "magic_resistance_reduction_percent"){
+					$stats_arr['magic_resistance_reduction_percent'] = $stats_arr['magic_resistance_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['magic_resistance_reduction_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "magic_resistance_penetration_flat"){
+					$stats_arr['magic_resistance_penetration_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "magic_resistance_penetration_percent"){
+					$stats_arr['magic_resistance_penetration_percent'] = $stats_arr['magic_resistance_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['magic_resistance_penetration_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "ability_power"){
+					$stats_arr['ability_power'] += $basic_effect_value;
+				}else if($basic_effect_key == "ability_power_scaling"){
+					$stats_arr['ability_power'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "armor"){
+					$stats_arr['armor'] += $basic_effect_value;
+				}else if($basic_effect_key == "armor_scaling"){
+					$stats_arr['armor_scaling'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "attack_damage"){
+					$stats_arr['bonus_attack_damage'] += $basic_effect_value;
+					$stats_arr['attack_damage'] = $stats_arr['base_attack_damage'] + $stats_arr['bonus_attack_damage'];
+				}else if($basic_effect_key == "attack_damage_scaling"){
+					$stats_arr['bonus_attack_damage'] += $basic_effect_value * $this->level;
+					$stats_arr['attack_damage'] = $stats_arr['base_attack_damage'] + $stats_arr['bonus_attack_damage'];
+				}else if($basic_effect_key == "attack_speed_percent"){
+					$stats_arr['bonus_attack_speed'] += $basic_effect_value;
+					$stats_arr['attack_speed'] = $stats_arr['base_attack_speed'] * (1 + $stats_arr['bonus_attack_speed']);
+				}else if($basic_effect_key == "cooldown_reduction_percent"){
+					$stats_arr['cooldown_reduction'] += $basic_effect_value;
+				}else if($basic_effect_key == "cooldown_reduction_scaling_percent"){
+					$stats_arr['cooldown_reduction'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "critical_chance_percent"){
+					$stats_arr['critical_chance_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "critical_damage_percent"){
+					$stats_arr['critical_damage_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "energy"){
+					$stats_arr['energy'] += $basic_effect_value;
+				}else if($basic_effect_key == "energy_regeneration_per_5"){
+					$stats_arr['energy_regeneration_per_5'] += $basic_effect_value;
+				}else if($basic_effect_key == "experience_percent"){
+					$stats_arr['experience_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "gold_per_10"){
+					$stats_arr['gold_per_10'] += $basic_effect_value;
+				}else if($basic_effect_key == "health"){
+					$stats_arr['bonus_health'] += $basic_effect_value;
+					$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
+				}else if($basic_effect_key == "health_percent"){
+					$stats_arr['bonus_health_percent'] += $basic_effect_value;
+					$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
+				}else if($basic_effect_key == "health_regeneration_per_5"){
+					$stats_arr['health_regeneration_per_5'] += $basic_effect_value;
+				}else if($basic_effect_key == "health_regeneration_scaling_per_5"){
+					$stats_arr['health_regeneration_per_5'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "health_scaling"){
+					$stats_arr['bonus_health'] += $basic_effect_value * $this->level;
+					$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
+				}else if($basic_effect_key == "lifesteal_percent"){
+					$stats_arr['lifesteal_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "magic_resistance"){
+					$stats_arr['magic_resistance'] += $basic_effect_value;
+				}else if($basic_effect_key == "magic_resistance_scaling"){
+					$stats_arr['magic_resistance'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "mana"){
+					$stats_arr['mana'] += $basic_effect_value;
+				}else if($basic_effect_key == "mana_scaling"){
+					$stats_arr['mana'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "mana_regeneration_per_5"){
+					$stats_arr['mana_regeneration_per_5'] += $basic_effect_value;
+				}else if($basic_effect_key == "mana_regeneration_scaling_per_5"){
+					$stats_arr['mana_regeneration_per_5'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "mana_scaling"){
+					$stats_arr['mana'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "movement_speed_percent"){
+					$stats_arr['bonus_movement_speed_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "movement_speed_flat"){
+					$stats_arr['bonus_movement_speed_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "revival"){
+					$stats_arr['revival_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "spell_vamp_percent"){
+					$stats_arr['spell_vamp_percent'] += $basic_effect_value;
+				}					
+				
+				# Incoming effects
+				else if($basic_effect_key == "self_armor_penetration_flat"){
+					$stats_arr['self_armor_penetration_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "self_armor_penetration_percent"){
+					$stats_arr['self_armor_penetration_percent'] = $stats_arr['self_armor_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['self_armor_penetration_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "self_armor_reduction_flat"){
+					$stats_arr['self_armor_reduction_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "self_armor_reduction_percent"){
+					$stats_arr['self_armor_reduction_percent'] = $stats_arr['self_armor_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_armor_reduction_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "self_magic_resistance_reduction_flat"){
+					$stats_arr['self_magic_resistance_reduction_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "self_magic_resistance_reduction_percent"){
+					$stats_arr['self_magic_resistance_reduction_percent'] = $stats_arr['self_magic_resistance_reduction_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_reduction_percent'] * $basic_effect_value;
+				}else if($basic_effect_key == "self_magic_resistance_penetration_flat"){
+					$stats_arr['self_magic_resistance_penetration_flat'] += $basic_effect_value;
+				}else if($basic_effect_key == "self_magic_resistance_penetration_percent"){
+					$stats_arr['self_magic_resistance_penetration_percent'] = $stats_arr['self_magic_resistance_penetration_percent'] == 0.0? $basic_effect_value : $stats_arr['self_magic_resistance_penetration_percent'] * $basic_effect_value;
+				}
+			}
+		}
+		return $stats_arr;
+	}	
 	
 	public function tick($tick_rate){
 		// TODO: Fix this	

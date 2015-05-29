@@ -5,7 +5,7 @@ namespace PerfectBuild\Runes\Quintessences;
 class MagicResistScaling extends \PerfectBuild\Runes\Rune{
 		
 	// Constructor
-	public function __construct($mob_obj) {		
+	public function __construct() {		
 		parent::__construct('Magic Resist Scaling');						
 		$this->basic_effects_arr['magic_resistance_scaling'] = 0.37;				
 	}
