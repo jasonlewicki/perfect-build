@@ -51,10 +51,13 @@ abstract Class Champion{
 	protected $summoner1_obj;
 	protected $summoner2_obj;
 	
+	protected $rune_arr;
+	
 	protected $effects_arr;
 		
 	public function __construct($summoner_arr, $rune_arr, $masteries_arr) {		
 		
+		$this->rune_arr = Array('Glyphs' => Array(),'Marks' => Array(),'Quintessences' => Array(),'Seals' => Array());
 		$this->effects_arr = Array();
 		
 		$summoner1 = '\PerfectBuild\Summoners\\'.$summoner_arr[0];
@@ -62,6 +65,16 @@ abstract Class Champion{
 		
 		$this->summoner1_obj 			= new $summoner1();
 		$this->summoner2_obj 			= new $summoner2();
+		
+		// Runes
+		foreach($rune_arr as $rune_type => $rune_type_arr){
+			foreach($rune_type_arr as $rune_name){
+				$rune_object_name = "\PerfectBuild\Runes\{$rune_type}\{$rune_name}";
+				$this->rune_arr[$rune_type] = new $rune_object_name;
+			} 
+		}
+	
+		// Masteries
 		
 		$this->current_gold = 450.0;
 		
