@@ -191,8 +191,8 @@ while(true){
 	//echo "Total damage: ".$total_damage. "\tTotal DPS: ".($total_damage/($slice/$tick_rate)). "\tCurrent DPS: ".$damage_per_tick."\n";
 	
 	// Top Damage
-	if(count($top_damage) < 10){
-		$top_damage[] = Array(
+	if(count($top_damage) < 20){
+		$top_damage[count($top_damage)] = Array(
 			'damage' => $total_damage, 
 			'dps' => ($total_damage/($slice/$tick_rate)), 
 			'Glyphs' => $runes_arr['Glyphs'][$glyph_index], 
@@ -203,25 +203,27 @@ while(true){
 	}else{
 		$lowest = 1000000000000;
 		$lowest_key = null;
-		foreach($top_damage as $key => $entry){
-			if($entry['damage'] < $lowest){
-				$lowest = $entry['damage'];
-				$lowest_key = $key;
+		for($index = 0; $index < 20; $index++){
+			if($top_damage[$index]['damage'] < $lowest){
+				$lowest = $top_damage[$index]['damage'];
+				$lowest_key = $index;
 			}
 		}
-		$top_damage[$lowest_key] = Array(
-			'damage' => $total_damage, 
-			'dps' => ($total_damage/($slice/$tick_rate)), 
-			'Glyphs' => $runes_arr['Glyphs'][$glyph_index], 
-			'Marks' => $runes_arr['Marks'][$mark_index], 
-			'Quintessences' => $runes_arr['Quintessences'][$quintessence_index], 
-			'Seals' => $runes_arr['Seals'][$seal_index]
-		); 
+		if($lowest_key !== null && $total_damage > $top_damage[$lowest_key]['damage']){
+			$top_damage[$lowest_key] = Array(
+				'damage' => $total_damage, 
+				'dps' => ($total_damage/($slice/$tick_rate)), 
+				'Glyphs' => $runes_arr['Glyphs'][$glyph_index], 
+				'Marks' => $runes_arr['Marks'][$mark_index], 
+				'Quintessences' => $runes_arr['Quintessences'][$quintessence_index], 
+				'Seals' => $runes_arr['Seals'][$seal_index]
+			); 
+		}
 	}
 	
 	// Top DPS
-	if(count($top_dps) < 10){
-		$top_dps[] = Array(
+	if(count($top_dps) < 20){
+		$top_dps[count($top_dps)] = Array(
 			'damage' => $total_damage, 
 			'dps' => ($total_damage/($slice/$tick_rate)), 
 			'Glyphs' => $runes_arr['Glyphs'][$glyph_index], 
@@ -232,21 +234,28 @@ while(true){
 	}else{
 		$lowest = 1000000000000;
 		$lowest_key = null;
-		foreach($top_dps as $key => $entry){
-			if($entry['dps'] < $lowest){
-				$lowest = $entry['dps'];
-				$lowest_key = $key;
+		for($index = 0; $index < 20; $index++){
+			if($top_damage[$index]['dps'] < $lowest){
+				$lowest = $top_damage[$index]['dps'];
+				$lowest_key = $index;
 			}
 		}
-		$top_dps[$lowest_key] = Array(
-			'damage' => $total_damage, 
-			'dps' => ($total_damage/($slice/$tick_rate)), 
-			'Glyphs' => $runes_arr['Glyphs'][$glyph_index], 
-			'Marks' => $runes_arr['Marks'][$mark_index], 
-			'Quintessences' => $runes_arr['Quintessences'][$quintessence_index], 
-			'Seals' => $runes_arr['Seals'][$seal_index]
-		); 
+		if($lowest_key !== null && ($total_damage/($slice/$tick_rate)) > $top_dps[$lowest_key]['dps']){
+			$top_dps[$lowest_key] = Array(
+				'damage' => $total_damage, 
+				'dps' => ($total_damage/($slice/$tick_rate)), 
+				'Glyphs' => $runes_arr['Glyphs'][$glyph_index], 
+				'Marks' => $runes_arr['Marks'][$mark_index], 
+				'Quintessences' => $runes_arr['Quintessences'][$quintessence_index], 
+				'Seals' => $runes_arr['Seals'][$seal_index]
+			); 
+		}
 	}
+	
+	/*
+	if($runes_arr['Glyphs'][$glyph_index] == "AbilityPower" && $runes_arr['Marks'][$mark_index] == "MagicPenetration" && $runes_arr['Quintessences'][$quintessence_index] == "AbilityPower" && $runes_arr['Seals'][$seal_index] == "AbilityPower" ){
+		echo "Total damage: ".$total_damage. "\tTotal DPS: ".($total_damage/($slice/$tick_rate)). "\tCurrent DPS: ".$damage_per_tick."\n";
+	}*/
 	
 	// Change up runes
 	$seal_index++;
@@ -271,30 +280,49 @@ while(true){
 displayResults($top_damage, $top_dps);
 
 /*
-TOP 10 DAMAGE
+TOP 20 DAMAGE
 -----------------------------
-Damage: 762.81	DPS: 54.408701854494	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AbilityPower
-Damage: 742.965	DPS: 52.993223965763	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AbilityPowerScaling
-Damage: 742.965	DPS: 52.993223965763	Glyphs: AbilityPowerScaling	Marks: AbilityPowerScaling	Quintessences: AbilityPower	Seals: AbilityPower
-Damage: 738.915	DPS: 52.704350927247	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AttackDamage
-Damage: 738.915	DPS: 52.704350927247	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AttackDamageScaling
-Damage: 738.915	DPS: 52.704350927247	Glyphs: MagicPenetration	Marks: MagicPenetration	Quintessences: AbilityPower	Seals: AbilityPower
-Damage: 738.915	DPS: 52.704350927247	Glyphs: AttackDamageScaling	Marks: AttackDamageScaling	Quintessences: AbilityPower	Seals: AbilityPower
-Damage: 738.915	DPS: 52.704350927247	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AttackSpeed
-Damage: 738.915	DPS: 52.704350927247	Glyphs: ArmorPenetration	Marks: ArmorPenetration	Quintessences: AbilityPower	Seals: AbilityPower
-Damage: 600	DPS: 47.961630695444	Glyphs: CooldownReduction	Marks: CooldownReduction	Quintessences: CooldownReduction	Seals: CriticalDamage
+Damage: 762.81  DPS: 54.408701854494    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 742.965 DPS: 52.993223965763    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AbilityPowerScaling
+Damage: 742.965 DPS: 52.993223965763    Glyphs: AbilityPowerScaling     Marks: AbilityPowerScaling      Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: HybridPenetration       Marks: HybridPenetration        Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: CriticalDamage
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: CriticalChance
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AttackDamage    Marks: AttackDamage     Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AttackDamageScaling     Marks: AttackDamageScaling      Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AttackSpeed
+Damage: 738.915 DPS: 53.351263537906    Glyphs: CooldownReduction       Marks: CooldownReduction        Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 53.856778425656    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: CooldownReduction
+Damage: 738.915 DPS: 52.704350927247    Glyphs: CriticalDamage  Marks: CriticalDamage   Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AttackDamageScaling
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AttackDamage
+Damage: 738.915 DPS: 52.704350927247    Glyphs: MagicPenetration        Marks: MagicPenetration Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: CriticalChance  Marks: CriticalChance   Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: ArmorPenetration        Marks: ArmorPenetration Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 738.915 DPS: 52.704350927247    Glyphs: AttackSpeed     Marks: AttackSpeed      Quintessences: AbilityPower     Seals: AbilityPower
+Damage: 723.12  DPS: 51.577746077033    Glyphs: AbilityPowerScaling     Marks: AbilityPowerScaling      Quintessences: AbilityPower     Seals: AbilityPowerScaling
+Damage: 721.5   DPS: 51.462196861626    Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AbilityPower
 
-TOP 10 DPS
+TOP 20 DPS
 -----------------------------
-DPS: 54.408701854494	Damage: 762.81	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AbilityPower
-DPS: 53.856778425656	Damage: 738.915	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: CooldownReduction
-DPS: 53.569340329835	Damage: 714.615	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AbilityPower
-DPS: 53.351263537906	Damage: 738.915	Glyphs: CooldownReduction	Marks: CooldownReduction	Quintessences: AbilityPower	Seals: AbilityPower
-DPS: 52.993223965763	Damage: 742.965	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: AbilityPowerScaling
-DPS: 52.993223965763	Damage: 742.965	Glyphs: AbilityPowerScaling	Marks: AbilityPowerScaling	Quintessences: AbilityPower	Seals: AbilityPower
-DPS: 52.928735632184	Damage: 690.72	Glyphs: AbilityPower	Marks: AbilityPower	Quintessences: AbilityPower	Seals: CooldownReduction
-DPS: 52.730088495575	Damage: 715.02	Glyphs: CooldownReduction	Marks: CooldownReduction	Quintessences: AbilityPower	Seals: CooldownReduction
-DPS: 52.704350927247	Damage: 738.915	Glyphs: ArmorPenetration	Marks: ArmorPenetration	Quintessences: AbilityPower	Seals: AbilityPower
-DPS: 47.961630695444	Damage: 600	Glyphs: CooldownReduction	Marks: CooldownReduction	Quintessences: CooldownReduction	Seals: CriticalDamage
-
+DPS: 54.408701854494    Damage: 762.81  Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 53.856778425656    Damage: 738.915 Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: CooldownReduction
+DPS: 53.569340329835    Damage: 714.615 Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.993223965763    Damage: 742.965 Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AbilityPowerScaling
+DPS: 52.993223965763    Damage: 742.965 Glyphs: AbilityPowerScaling     Marks: AbilityPowerScaling      Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: CriticalChance  Marks: CriticalChance   Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: AttackDamage    Marks: AttackDamage     Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: HybridPenetration       Marks: HybridPenetration        Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: AttackDamageScaling     Marks: AttackDamageScaling      Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: MagicPenetration        Marks: MagicPenetration Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: CriticalDamage  Marks: CriticalDamage   Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 52.704350927247    Damage: 738.915 Glyphs: AbilityPower    Marks: AbilityPower     Quintessences: AbilityPower     Seals: AttackDamage
+DPS: 52.704350927247    Damage: 738.915 Glyphs: ArmorPenetration        Marks: ArmorPenetration Quintessences: AbilityPower     Seals: AbilityPower
+DPS: 51.288873038516    Damage: 719.07  Glyphs: AttackDamageScaling     Marks: AttackDamageScaling      Quintessences: AbilityPower     Seals: AbilityPowerScaling
+DPS: 51.288873038516    Damage: 719.07  Glyphs: AttackSpeed     Marks: AttackSpeed      Quintessences: AbilityPower     Seals: AbilityPowerScaling
+DPS: 51.288873038516    Damage: 719.07  Glyphs: AbilityPowerScaling     Marks: AbilityPowerScaling      Quintessences: AbilityPower     Seals: AttackDamage
+DPS: 51 Damage: 715.02  Glyphs: AttackDamage    Marks: AttackDamage     Quintessences: AbilityPower     Seals: CriticalDamage
+DPS: 51 Damage: 715.02  Glyphs: AttackSpeed     Marks: AttackSpeed      Quintessences: AbilityPower     Seals: AttackDamageScaling
+DPS: 51 Damage: 715.02  Glyphs: AttackDamage    Marks: AttackDamage     Quintessences: AbilityPower     Seals: AttackDamageScaling
+DPS: 51 Damage: 715.02  Glyphs: AttackSpeed     Marks: AttackSpeed      Quintessences: AbilityPower     Seals: CriticalDamage
 */
