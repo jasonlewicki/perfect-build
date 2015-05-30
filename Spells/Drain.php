@@ -15,6 +15,7 @@ class Drain extends \PerfectBuild\Spells\Spell{
 	public function cast($caster_obj, $receiver_obj){
 		
 		// TODO: Need checks for mana availability and range
+		parent::cast($caster_obj, $receiver_obj);
 		
 		$caster_obj->stats();
 		

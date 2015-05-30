@@ -9,6 +9,9 @@ abstract Class Spell{
 	protected $level;
 	protected $range_arr;
 	protected $cooldown_arr;
+	protected $cooldown_time_elapsed;
+	protected $cooldown_duration;
+	protected $on_cooldown;
 	
 	/*	
 	protected $is_channeled;
@@ -25,9 +28,14 @@ abstract Class Spell{
 		
 	public function __construct($name) {
 		$this->name = $name;
+		$this->on_cooldown = false;
 	}
 	
-	abstract public function cast($caster_obj, $receiver_obj);
+	public function cast($caster_obj, $receiver_obj){
+		$this->on_cooldown = true;
+		$stats_arr = $caster_obj->stats();	
+		$this->cooldown_duration = $this->cooldown_arr[$this->level] * (1 - $stats_arr['cooldown_reduction']);		
+	}
 	
 	public function level() {
 		if($this->level == $this->max_ranks){
@@ -40,7 +48,16 @@ abstract Class Spell{
 	
 	// Is the spell available to be cast?
 	public function free() {
-		
+		return !($this->on_cooldown);
+	}
+	
+	public function tick($tick_rate) {
+		if($this->on_cooldown){
+			$this->cooldown_time_elapsed++;
+			if(($this->cooldown_duration*$tick_rate) - $this->cooldown_time_elapsed < 0.0){
+				$this->on_cooldown = false;
+			}		
+		}
 	}
 	
 }

@@ -2,7 +2,7 @@
 
 namespace PerfectBuild\Runes\Glyphs;
 
-class CoodownReductionScaling extends \PerfectBuild\Runes\Rune{
+class CooldownReductionScaling extends \PerfectBuild\Runes\Rune{
 		
 	// Constructor
 	public function __construct() {		

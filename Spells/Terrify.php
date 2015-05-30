@@ -10,6 +10,7 @@ class Terrify extends \PerfectBuild\Spells\Spell{
 	}
 	
 	public function cast($caster_obj, $receiver_obj){
+		parent::cast($caster_obj, $receiver_obj);
 		
 	}
 }

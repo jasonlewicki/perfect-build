@@ -101,6 +101,19 @@ abstract Class Champion{
 		$this->spell4_obj->level();
 	}
 	
+	public function spell1Free(){
+		return $this->spell1_obj->free();
+	}	
+	public function spell2Free(){
+		return $this->spell2_obj->free();
+	}
+	public function spell3Free(){
+		return $this->spell3_obj->free();
+	}
+	public function spell4Free(){
+		return $this->spell4_obj->free();
+	}
+	
 	public function summoner1(){
 		
 	}
@@ -159,7 +172,7 @@ abstract Class Champion{
 			}else{
 				$effective_armor_reduction = 2 - (100 / (100 - $effective_armor));
 			}		
-			$true_armor_damage = $damage * $effective_armor_reduction;
+			$true_armor_damage = ($damage + ($attacker_stats['critical_chance_percent'] * $attacker_stats['critical_damage_percent'])) * $effective_armor_reduction;
 		}		
 		
 		######
@@ -315,6 +328,11 @@ abstract Class Champion{
 		foreach($this->effects_arr as $effect_obj){	
 			$stats_arr = $this->addStats($stats_arr, $effect_obj->basicEffectsArr());
 		}
+		
+		// Cooldown
+		if($stats_arr['cooldown_reduction'] > 0.4){
+			$stats_arr['cooldown_reduction'] = 0.4;
+		}
 	
 		return $stats_arr;			
 	}	
@@ -438,6 +456,13 @@ abstract Class Champion{
 	public function tick($tick_rate){
 		// TODO: Fix this	
 		
+		// Spell cooldowns
+		$this->spell1_obj->tick($tick_rate);
+		$this->spell2_obj->tick($tick_rate);
+		$this->spell3_obj->tick($tick_rate);
+		$this->spell4_obj->tick($tick_rate);
+		
+		// DOT (Damage Over Time) spells
 		$damage_arr =  Array(
 			'total_damage' => 0,
 			'total_armor_damage' => 0,

@@ -1,6 +1,6 @@
 <?php 
 
-namespace PerfectBuild\Runes\Qunitessences;
+namespace PerfectBuild\Runes\Quintessences;
 
 class AttackSpeed extends \PerfectBuild\Runes\Rune{
 		

@@ -23,6 +23,10 @@ Class Engine{
 		
 	}
 	
+	public function reset(){
+		return $this->time = 0;		
+	}
+	
 	// Return tick rate
 	public function tickRate(){		
 		return $this->tick_rate;		
