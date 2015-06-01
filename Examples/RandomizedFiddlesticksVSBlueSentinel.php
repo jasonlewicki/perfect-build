@@ -75,6 +75,8 @@ $rune_arr = Array(
 	'Seals' => Array()
 );
 
+$total_index = 0;
+
 $glyph_index = 0;
 $mark_index = 0;
 $quintessence_index = 0;
@@ -84,10 +86,10 @@ $top_damage = Array();
 $top_dps = Array();
 
 while(true){
-	
+		
 	// Print progress
 	if ($quintessence_index > 0 && $seal_index == 0){
-		echo "{$glyph_index}{$mark_index}{$quintessence_index}{$seal_index} of ".count($runes_arr['Glyphs']).count($runes_arr['Marks']).count($runes_arr['Quintessences']).count($runes_arr['Seals'])."\n";
+		echo "\rProgress: ".number_format(100*($total_index/(count($runes_arr['Glyphs']) * count($runes_arr['Marks']) * count($runes_arr['Quintessences']) * count($runes_arr['Seals']))),4)."%";
 	}
 	
 	// Populate Rune pages
@@ -274,6 +276,8 @@ while(true){
 	if($glyph_index == count($runes_arr['Glyphs'])-1 && $mark_index == count($runes_arr['Marks'])-1 && $quintessence_index == count($runes_arr['Quintessences'])-1 && $seal_index == count($runes_arr['Seals'])-1){
 		break;
 	}
+		
+	$total_index++;
 
 }
 

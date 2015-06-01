@@ -28,7 +28,7 @@ function displayResults($top_damage, $top_dps){
 	usort($top_dps, 'sortByDPS');
 	
 	// Print Results
-	echo "\nTOP 20 DAMAGE\n-----------------------------\n";
+	echo "\n\nTOP 20 DAMAGE\n-----------------------------\n";
 	foreach($top_damage as $key => $entry){
 		echo "Damage: ".$entry['damage']. "\tDPS: ".$entry['dps']. "\tGlyphs: ".$entry['Marks']. "\tMarks: ".$entry['Marks']. "\tQuintessences: ".$entry['Quintessences']. "\tSeals: ".$entry['Seals']."\n";
 	}
