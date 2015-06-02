@@ -5,8 +5,8 @@ namespace PerfectBuild\Champions;
 class Fiddlesticks extends \PerfectBuild\Champions\Champion{
 		
 	// Constructor
-	public function __construct($level, $spell_level_arr, $summoner_arr, $rune_arr, $masteries_arr) {		
-		parent::__construct($summoner_arr, $rune_arr, $masteries_arr);			
+	public function __construct($level, $spell_level_arr, $summoner_arr, $item_arr, $rune_arr, $masteries_arr) {		
+		parent::__construct($summoner_arr, $item_arr, $rune_arr, $masteries_arr);			
 			
 		// After implementation of masteries...
 		//$this->gold						= 0;

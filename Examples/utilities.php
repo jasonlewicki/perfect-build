@@ -29,13 +29,17 @@ function displayResults($top_damage, $top_dps){
 	
 	// Print Results
 	echo "\n\nTOP 20 DAMAGE\n-----------------------------\n";
+	$i = 0;
 	foreach($top_damage as $key => $entry){
-		echo "Damage: ".$entry['damage']. "\tDPS: ".$entry['dps']. "\tGlyphs: ".$entry['Marks']. "\tMarks: ".$entry['Marks']. "\tQuintessences: ".$entry['Quintessences']. "\tSeals: ".$entry['Seals']."\n";
+		echo "Damage: ".$entry['damage']. "\tDPS: ".$entry['dps']. "\tGlyphs: ".$entry['Glyphs']. "\tMarks: ".$entry['Marks']. "\tQuintessences: ".$entry['Quintessences']. "\tSeals: ".$entry['Seals']."\n";
+		if(++$i >= 20) break;
 	}
 	
 	echo "\nTOP 20 DPS\n-----------------------------\n";
+	$i = 0;
 	foreach($top_dps as $key => $entry){
-		echo "DPS: ".$entry['dps']. "\tDamage: ".$entry['damage']. "\tGlyphs: ".$entry['Marks']. "\tMarks: ".$entry['Marks']. "\tQuintessences: ".$entry['Quintessences']. "\tSeals: ".$entry['Seals']."\n";
+		echo "DPS: ".$entry['dps']. "\tDamage: ".$entry['damage']. "\tGlyphs: ".$entry['Glyphs']. "\tMarks: ".$entry['Marks']. "\tQuintessences: ".$entry['Quintessences']. "\tSeals: ".$entry['Seals']."\n";
+		if(++$i >= 20) break;
 	}
 }
 

@@ -8,7 +8,8 @@ abstract Class Rune{
 	protected $basic_effects_arr;
 		
 	public function __construct($name) {
-		$this->name = $name;		
+		$this->name = $name;		 
+		$this->basic_effects_arr = Array();
 	}
 		
 	public function name() {

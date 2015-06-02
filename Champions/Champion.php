@@ -48,6 +48,14 @@ abstract Class Champion{
 	protected $spell3_obj;
 	protected $spell4_obj;
 	
+	
+	protected $item1_obj;
+	protected $item2_obj;
+	protected $item3_obj;
+	protected $item4_obj;
+	protected $item5_obj;
+	protected $item6_obj;
+	
 	protected $summoner1_obj;
 	protected $summoner2_obj;
 	
@@ -55,30 +63,47 @@ abstract Class Champion{
 	
 	protected $effects_arr;
 		
-	public function __construct($summoner_arr, $rune_arr, $masteries_arr) {		
+	public function __construct($summoner_arr, $item_arr, $rune_arr, $masteries_arr) {				
 		
-		$this->rune_arr = Array('Glyphs' => Array(),'Marks' => Array(),'Quintessences' => Array(),'Seals' => Array());
 		$this->effects_arr = Array();
 		
+		// Summoners	
+		if(count($summoner_arr)>2){
+			throw new \Exception('Summoner Count Exeception');
+		}
 		$summoner1 = '\PerfectBuild\Summoners\\'.$summoner_arr[0];
-		$summoner2 = '\PerfectBuild\Summoners\\'.$summoner_arr[1];
-		
+		$summoner2 = '\PerfectBuild\Summoners\\'.$summoner_arr[1];				
 		$this->summoner1_obj 			= new $summoner1();
 		$this->summoner2_obj 			= new $summoner2();
 		
+		// Items	
+		if(count($item_arr)>6){
+			throw new \Exception('Item Count Exeception');
+		}
+		$index = 0;
+		foreach($item_arr as $item){			
+			$index++;	
+			$item_num = "item".$index;
+			$item = '\PerfectBuild\Items\\'.$item;	
+			$this->$$item_num = new $item();
+		}
+		
 		// Runes
+		if(count($this->rune_arr['Glyphs']) > 9 || count($this->rune_arr['Marks']) > 9 || count($this->rune_arr['Quintessences']) > 3 || count($this->rune_arr['Seals']) > 9 ){
+			throw new \Exception('Rune Count Exeception');
+		}
+		$this->rune_arr = Array('Glyphs' => Array(),'Marks' => Array(),'Quintessences' => Array(),'Seals' => Array());
 		foreach($rune_arr as $rune_type => $rune_type_arr){
 			foreach($rune_type_arr as $rune_name){
 				$rune_object_name = "\PerfectBuild\Runes\\{$rune_type}\\{$rune_name}";
 				$this->rune_arr[$rune_type][] = new $rune_object_name;
 			} 
 		}
-		if(count($this->rune_arr['Glyphs']) > 9 || count($this->rune_arr['Marks']) > 9 || count($this->rune_arr['Quintessences']) > 3 || count($this->rune_arr['Seals']) > 9 ){
-			throw new \Exception('Rune Count Exeception');
-		}
 	
 		// Masteries
 		
+		
+		// Starting gold
 		$this->current_gold = 450.0;
 		
 	}
@@ -303,6 +328,7 @@ abstract Class Champion{
 			'movement_speed'							=> $this->base_movement_speed,
 			'lifesteal_percent'							=> 0.0,
 			'revival_percent'							=> 0.0,
+			'item_cooldown_reduction'					=> 0.0,
 			'spell_vamp_percent' 						=> 0.0,
 			'self_armor_penetration_flat' 				=> 0.0,
 			'self_armor_penetration_percent' 			=> 0.0,
