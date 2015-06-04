@@ -46,8 +46,7 @@ abstract Class Champion{
 	protected $spell1_obj;
 	protected $spell2_obj;
 	protected $spell3_obj;
-	protected $spell4_obj;
-	
+	protected $spell4_obj;	
 	
 	protected $item1_obj;
 	protected $item2_obj;
@@ -345,6 +344,50 @@ abstract Class Champion{
 			foreach($rune_type_arr as $rune_obj){				
 				$stats_arr = $this->addStats($stats_arr, $rune_obj->basicEffectsArr());
 			} 
+		}
+		
+		// Items
+		if(!is_null($this->item1_obj)){
+			$stats_arr = $this->addStats($stats_arr, $this->item1_obj->basicEffectsArr());		
+			$effects_arr = $this->item1_obj->effectsArr();
+			foreach($effects_arr as $effect){
+				$stats_arr = $this->addStats($stats_arr, $effect);
+			}
+		}
+		if(!is_null($this->item2_obj)){
+			$stats_arr = $this->addStats($stats_arr, $this->item2_obj->basicEffectsArr());		
+			$effects_arr = $this->item2_obj->effectsArr();
+			foreach($effects_arr as $effect){
+				$stats_arr = $this->addStats($stats_arr, $effect);
+			}		
+		}
+		if(!is_null($this->item3_obj)){
+			$stats_arr = $this->addStats($stats_arr, $this->item3_obj->basicEffectsArr());		
+			$effects_arr = $this->item3_obj->effectsArr();
+			foreach($effects_arr as $effect){
+				$stats_arr = $this->addStats($stats_arr, $effect);
+			}		
+		}
+		if(!is_null($this->item4_obj)){
+			$stats_arr = $this->addStats($stats_arr, $this->item4_obj->basicEffectsArr());		
+			$effects_arr = $this->item4_obj->effectsArr();
+			foreach($effects_arr as $effect){
+				$stats_arr = $this->addStats($stats_arr, $effect);
+			}		
+		}
+		if(!is_null($this->item5_obj)){
+			$stats_arr = $this->addStats($stats_arr, $this->item5_obj->basicEffectsArr());		
+			$effects_arr = $this->item5_obj->effectsArr();
+			foreach($effects_arr as $effect){
+				$stats_arr = $this->addStats($stats_arr, $effect);
+			}		
+		}
+		if(!is_null($this->item6_obj)){
+			$stats_arr = $this->addStats($stats_arr, $this->item6_obj->basicEffectsArr());		
+			$effects_arr = $this->item6_obj->effectsArr();
+			foreach($effects_arr as $effect){
+				$stats_arr = $this->addStats($stats_arr, $effect);
+			}		
 		}
 		
 		// Masteries

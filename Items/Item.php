@@ -40,7 +40,7 @@ abstract Class Item{
 	}
 	
 	public function effectsArr() {
-		return $this->basic_effects_arr;
+		return $this->effects_arr;
 	}
 	
 	public function tick($tick_rate){
