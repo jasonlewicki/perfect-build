@@ -31,7 +31,7 @@ abstract Class Effect{
 	
 	public function tick($tick_rate){
 		
-		// Infinite effects
+		// Infinite effects, don't expire
 		if ($this->duration === false){
 			return Array('expire' => false);
 		}
