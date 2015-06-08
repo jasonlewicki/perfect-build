@@ -155,3 +155,8 @@ $runes_arr = Array(
 		'CooldownReduction',
 	)
 );
+
+/*********************************
+ * 		 COMPLETE ITEM LIST
+ *********************************/
+$items_arr = Array();
