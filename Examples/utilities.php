@@ -160,3 +160,7 @@ $runes_arr = Array(
  * 		 COMPLETE ITEM LIST
  *********************************/
 $items_arr = Array();
+
+/*********************************
+ * 		 COMPLETE LEVEL LIST
+ *********************************/
