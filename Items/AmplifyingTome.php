@@ -11,7 +11,7 @@ class AmplifyingTome extends \PerfectBuild\Items\Item{
 		parent::__construct("Amplifying Tome");	
 		$this->cost = 435;	
 		$this->sell_value = 305;	
-		$this->basic_effects_arr['ability_power'] = 21.0;
+		$this->basic_effects_arr['ability_power'] = 20.0;
 	}	
 	
 	public function activate($caster_obj, $mob_obj){
