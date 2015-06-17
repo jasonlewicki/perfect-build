@@ -470,6 +470,8 @@ abstract Class Champion{
 					$stats_arr['health_regeneration_per_5'] += $basic_effect_value;
 				}else if($basic_effect_key == "health_regeneration_scaling_per_5"){
 					$stats_arr['health_regeneration_per_5'] += $basic_effect_value * $this->level;
+				}else if($basic_effect_key == "health_regeneration_percent"){
+					$stats_arr['health_regeneration_per_5'] += ($this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level)) * $basic_effect_value;
 				}else if($basic_effect_key == "health_scaling"){
 					$stats_arr['bonus_health'] += $basic_effect_value * $this->level;
 					$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);

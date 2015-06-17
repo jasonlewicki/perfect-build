@@ -9,7 +9,7 @@ class AbyssalScepeter extends \PerfectBuild\Effects\Effect{
 		
 	// Constructor
 	public function __construct($option_arr) {		
-		parent::__construct("Magic Resistance Reduction Flat");	
+		parent::__construct("Abyssal Scepter");	
 		
 		$this->duration = false;
 		$this->basic_effects_arr['magic_resistance_reduction_flat'] = 20.0;
