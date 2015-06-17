@@ -3,8 +3,6 @@
 namespace PerfectBuild\Items;
 
 class ClothArmor extends \PerfectBuild\Items\Item{
-	
-	protected $interval;
 		
 	// Constructor
 	public function __construct() {		

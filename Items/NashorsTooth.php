@@ -2,13 +2,13 @@
 
 namespace PerfectBuild\Items;
 
-class LiandrysTorment extends \PerfectBuild\Items\Item{
+class NashorsTooth extends \PerfectBuild\Items\Item{
 	
 	protected $interval;
 		
 	// Constructor
 	public function __construct() {		
-		parent::__construct("Liandry's Torment");	
+		parent::__construct("Nashor's Tooth");	
 		$this->cost = ;	
 		$this->sell_value = ;	
 		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;

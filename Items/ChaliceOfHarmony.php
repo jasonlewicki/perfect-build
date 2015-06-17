@@ -2,13 +2,13 @@
 
 namespace PerfectBuild\Items;
 
-class LiandrysTorment extends \PerfectBuild\Items\Item{
+class ChalliceOfHarmony extends \PerfectBuild\Items\Item{
 	
 	protected $interval;
 		
 	// Constructor
 	public function __construct() {		
-		parent::__construct("Liandry's Torment");	
+		parent::__construct("Chalice of Harmony");	
 		$this->cost = ;	
 		$this->sell_value = ;	
 		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;

@@ -3,9 +3,7 @@
 namespace PerfectBuild\Items;
 
 class BlastingWand extends \PerfectBuild\Items\Item{
-	
-	protected $interval;
-		
+			
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Blasting Wand");
