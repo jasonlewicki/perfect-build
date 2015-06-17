@@ -7,6 +7,6 @@ class MovementSpeed extends \PerfectBuild\Runes\Rune{
 	// Constructor
 	public function __construct() {		
 		parent::__construct('Movement Speed');						
-		$this->basic_effects_arr['movement_speed_percent'] = 0.015;				
+		$this->basic_effects_arr['bonus_movement_speed_percent'] = 0.015;				
 	}
 }
