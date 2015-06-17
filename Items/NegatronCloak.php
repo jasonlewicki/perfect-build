@@ -3,16 +3,13 @@
 namespace PerfectBuild\Items;
 
 class NegatronCloak extends \PerfectBuild\Items\Item{
-	
-	protected $interval;
 		
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Negatron Cloak");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 850;	
+		$this->sell_value = 595;	
+		$this->basic_effects_arr['magic_resistance'] = 45;
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

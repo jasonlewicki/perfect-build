@@ -13,7 +13,7 @@ class Legion extends \PerfectBuild\Effects\Effect{
 		
 		$this->duration = false;
 		$this->basic_effects_arr['magic_resistance'] = 20.0;
-		$this->basic_effects_arr['base_health_regeneration_percent'] = 0.20;
+		$this->basic_effects_arr['health_regeneration_percent'] = 0.20;
 		$this->unique = true;
 		$this->range = 1100;
 	}	

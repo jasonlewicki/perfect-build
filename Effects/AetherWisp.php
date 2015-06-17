@@ -9,7 +9,7 @@ class AetherWisp extends \PerfectBuild\Effects\Effect{
 		parent::__construct("Aether Wisp");	
 		
 		$this->duration = false;
-		$this->basic_effects_arr['movement_speed'] = 0.05;
+		$this->basic_effects_arr['movement_speed_percent'] = 0.05;
 		$this->unique = true;
 		$this->range = 700;
 	}	

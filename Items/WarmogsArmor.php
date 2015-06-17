@@ -9,10 +9,10 @@ class WarmogsArmor extends \PerfectBuild\Items\Item{
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Warmog's Armor");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 2500;	
+		$this->sell_value = 1981;	
+		$this->basic_effects_arr['health'] = 800;
+		$this->effects_arr[] = new \PerfectBuild\Effects\WarmogsArmor();
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

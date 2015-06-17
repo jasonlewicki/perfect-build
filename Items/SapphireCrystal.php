@@ -3,16 +3,13 @@
 namespace PerfectBuild\Items;
 
 class SapphireCrystal extends \PerfectBuild\Items\Item{
-	
-	protected $interval;
 		
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Sapphire Crystal");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 400;	
+		$this->sell_value = 280;	
+		$this->basic_effects_arr['mana'] = 200;
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

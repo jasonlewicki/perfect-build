@@ -9,10 +9,9 @@ class BootsOfSpeed extends \PerfectBuild\Items\Item{
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Boots of Speed");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 325;	
+		$this->sell_value = 227;	
+		$this->effects_arr[] = new \PerfectBuild\Effects\EnchancedMovement(Array('movement_speed_flat'=>25));
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

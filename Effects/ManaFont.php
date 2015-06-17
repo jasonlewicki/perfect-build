@@ -2,13 +2,13 @@
 
 namespace PerfectBuild\Effects;
 
-class AbyssalScepeter extends \PerfectBuild\Effects\Effect{
+class ManaFont extends \PerfectBuild\Effects\Effect{
 	
 	protected $interval;
 		
 	// Constructor
 	public function __construct($option_arr) {		
-		parent::__construct("Abyssal Scepter");	
+		parent::__construct("Mana font");	
 		
 		$this->duration = false;
 		$this->unique = true;

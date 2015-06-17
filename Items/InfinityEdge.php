@@ -3,16 +3,15 @@
 namespace PerfectBuild\Items;
 
 class infinityEdge extends \PerfectBuild\Items\Item{
-	
-	protected $interval;
 		
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Infinity Edge");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 3800;	
+		$this->sell_value = 2660;	
+		$this->basic_effects_arr['attack_damage'] = 80;
+		$this->basic_effects_arr['critical_chance_percent'] = 0.20;
+		$this->effects_arr[] = new \PerfectBuild\Effects\InfinityEdge();
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

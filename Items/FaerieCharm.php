@@ -4,15 +4,12 @@ namespace PerfectBuild\Items;
 
 class FaerieCharm extends \PerfectBuild\Items\Item{
 	
-	protected $interval;
-		
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Faerie Charm");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 180;	
+		$this->sell_value = 126;	
+		$this->basic_effects_arr['mana_regeneration_per_5_percent'] = 0.25;
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

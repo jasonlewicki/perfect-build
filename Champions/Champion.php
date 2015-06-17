@@ -320,7 +320,8 @@ abstract Class Champion{
 			'bonus_health'								=> 0.0,
 			'health'									=> $this->base_health + ((1 - $this->level) * $this->health_per_level),
 			'base_health_regeneration_per_5'			=> $this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level),
-			'bonus_health_regeneration_per_5'			=> 0.0,
+			'bonus_health_regeneration_per_5_flat'		=> 0.0,
+			'bonus_health_regeneration_per_5_percent'	=> 0.0,
 			'health_regeneration_per_5'					=> $this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level),
 			'mana'										=> $this->base_mana + ((1 - $this->level) * $this->mana_regen_per_level),
 			'base_mana_regeneration_per_5'				=> $this->base_mana_regen + ((1 - $this->level) * $this->mana_regen_per_level),
@@ -333,8 +334,11 @@ abstract Class Champion{
 			'movement_speed'							=> $this->base_movement_speed,
 			'lifesteal_percent'							=> 0.0,
 			'revival_percent'							=> 0.0,
+			'slow_resist_percent'						=> 0.0,
 			'item_cooldown_reduction'					=> 0.0,
 			'spell_vamp_percent' 						=> 0.0,
+			'block_basic_attack_percent'				=> 0.0,
+			'tenacity'									=> 0.0,
 			'self_armor_penetration_flat' 				=> 0.0,
 			'self_armor_penetration_percent' 			=> 0.0,
 			'self_armor_reduction_flat' 				=> 0.0,
@@ -473,14 +477,14 @@ abstract Class Champion{
 					$stats_arr['bonus_health_percent'] += $basic_effect_value;
 					$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
 				}else if($basic_effect_key == "health_regeneration_per_5"){
-					$stats_arr['bonus_health_regeneration_per_5'] += $basic_effect_value;
-					$stats_arr['health_regeneration_per_5'] += $basic_effect_value;
+					$stats_arr['bonus_health_regeneration_per_5_flat'] += $basic_effect_value;
+					$stats_arr['health_regeneration_per_5'] = (($this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level)) * (1 + $stats_arr['bonus_health_regeneration_per_5_percent'])) + $stats_arr['base_health_regeneration_per_5'];					
 				}else if($basic_effect_key == "health_regeneration_scaling_per_5"){
-					$stats_arr['bonus_health_regeneration_per_5'] += $basic_effect_value * $this->level;
-					$stats_arr['health_regeneration_per_5'] += $basic_effect_value * $this->level;;
-				}else if($basic_effect_key == "base_health_regeneration_percent"){
-					$stats_arr['bonus_health_regeneration_per_5'] += $stats_arr['base_health_regeneration_per_5'] * $basic_effect_value;
-					$stats_arr['health_regeneration_per_5'] += $stats_arr['base_health_regeneration_per_5'] * $basic_effect_value;
+					$stats_arr['bonus_health_regeneration_per_5_flat'] += $basic_effect_value * $this->level;
+					$stats_arr['health_regeneration_per_5'] = (($this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level)) * (1 + $stats_arr['bonus_health_regeneration_per_5_percent'])) + $stats_arr['base_health_regeneration_per_5'];					
+				}else if($basic_effect_key == "health_regeneration_percent"){
+					$stats_arr['bonus_health_regeneration_per_5_percent'] += $basic_effect_value;
+					$stats_arr['health_regeneration_per_5'] = (($this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level)) * (1 + $stats_arr['bonus_health_regeneration_per_5_percent'])) + $stats_arr['base_health_regeneration_per_5'];
 				}else if($basic_effect_key == "health_scaling"){
 					$stats_arr['bonus_health'] += $basic_effect_value * $this->level;
 					$stats_arr['health'] = ($stats_arr['base_health'] + $stats_arr['bonus_health']) * (1 + $stats_arr['bonus_health_percent']);
@@ -505,16 +509,22 @@ abstract Class Champion{
 					$stats_arr['mana_regeneration_per_5'] = $stats_arr['bonus_mana_regeneration_per_5_flat'] + ( $stats_arr['base_mana_regeneration_per_5'] * (1 + $stats_arr['bonus_mana_regeneration_per_5_percent']));
 				}else if($basic_effect_key == "mana_scaling"){
 					$stats_arr['mana'] += $basic_effect_value * $this->level;
-				}else if($basic_effect_key == "bonus_movement_speed_percent"){
+				}else if($basic_effect_key == "movement_speed_percent"){
 					$stats_arr['bonus_movement_speed_percent'] += $basic_effect_value;
 					$stats_arr['movement_speed'] = ($stats_arr['base_movement_speed'] + $stats_arr['bonus_movement_speed_flat']) * (1 + $stats_arr['bonus_movement_speed_percent']);
-				}else if($basic_effect_key == "bonus_movement_speed_flat"){
+				}else if($basic_effect_key == "movement_speed_flat"){
 					$stats_arr['bonus_movement_speed_flat'] += $basic_effect_value;
 					$stats_arr['movement_speed'] = ($stats_arr['base_movement_speed'] + $stats_arr['bonus_movement_speed_flat']) * (1 + $stats_arr['bonus_movement_speed_percent']);
 				}else if($basic_effect_key == "revival"){
 					$stats_arr['revival_percent'] += $basic_effect_value;
 				}else if($basic_effect_key == "spell_vamp_percent"){
 					$stats_arr['spell_vamp_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "slow_resist_percent"){
+					$stats_arr['slow_resist_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "block_basic_attack_percent"){
+					$stats_arr['block_basic_attack_percent'] += $basic_effect_value;
+				}else if($basic_effect_key == "tenacity"){
+					$stats_arr['tenacity'] += $basic_effect_value;
 				}					
 				
 				# Incoming effects

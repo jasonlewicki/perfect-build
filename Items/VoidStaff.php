@@ -9,10 +9,10 @@ class VoidStaff extends \PerfectBuild\Items\Item{
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Void Staff");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 2295;	
+		$this->sell_value = 1607;	
+		$this->basic_effects_arr['ability_power'] = 70;
+		$this->effects_arr[] = new \PerfectBuild\Effects\VoidStaff();
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

@@ -8,7 +8,7 @@ class Favor extends \PerfectBuild\Effects\Effect{
 			
 	// Constructor
 	public function __construct($option_arr) {		
-		parent::__construct("Abyssal Scepter");	
+		parent::__construct("Favor");	
 		
 		$this->duration = false;
 		//$this->basic_effects_arr['magic_resistance_reduction_flat'] = 20.0;
