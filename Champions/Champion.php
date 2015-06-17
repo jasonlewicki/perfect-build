@@ -323,6 +323,9 @@ abstract Class Champion{
 			'bonus_health_regeneration_per_5'			=> 0.0,
 			'health_regeneration_per_5'					=> $this->base_health_regen + ((1 - $this->level) * $this->health_regen_per_level),
 			'mana'										=> $this->base_mana + ((1 - $this->level) * $this->mana_regen_per_level),
+			'base_mana_regeneration_per_5'				=> $this->base_mana_regen + ((1 - $this->level) * $this->mana_regen_per_level),
+			'bonus_mana_regeneration_per_5_flat'		=> 0.0,
+			'bonus_mana_regeneration_per_5_percent'		=> 0.0,
 			'mana_regeneration_per_5'					=> $this->base_mana_regen + ((1 - $this->level) * $this->mana_regen_per_level),
 			'bonus_movement_speed_percent'				=> 0.0,
 			'bonus_movement_speed_flat'					=> 0.0,
@@ -492,9 +495,14 @@ abstract Class Champion{
 				}else if($basic_effect_key == "mana_scaling"){
 					$stats_arr['mana'] += $basic_effect_value * $this->level;
 				}else if($basic_effect_key == "mana_regeneration_per_5"){
-					$stats_arr['mana_regeneration_per_5'] += $basic_effect_value;
+					$stats_arr['bonus_mana_regeneration_per_5_flat'] += $basic_effect_value;
+					$stats_arr['mana_regeneration_per_5'] = $stats_arr['bonus_mana_regeneration_per_5_flat'] + ( $stats_arr['base_mana_regeneration_per_5'] * (1 + $stats_arr['bonus_mana_regeneration_per_5_percent']));
 				}else if($basic_effect_key == "mana_regeneration_scaling_per_5"){
-					$stats_arr['mana_regeneration_per_5'] += $basic_effect_value * $this->level;
+					$stats_arr['bonus_mana_regeneration_per_5_flat'] += $basic_effect_value * $this->level;
+					$stats_arr['mana_regeneration_per_5'] = $stats_arr['bonus_mana_regeneration_per_5_flat'] + ( $stats_arr['base_mana_regeneration_per_5'] * (1 + $stats_arr['bonus_mana_regeneration_per_5_percent']));
+				}else if($basic_effect_key == "mana_regeneration_per_5_percent"){
+					$stats_arr['bonus_mana_regeneration_per_5_percent'] += $basic_effect_value;
+					$stats_arr['mana_regeneration_per_5'] = $stats_arr['bonus_mana_regeneration_per_5_flat'] + ( $stats_arr['base_mana_regeneration_per_5'] * (1 + $stats_arr['bonus_mana_regeneration_per_5_percent']));
 				}else if($basic_effect_key == "mana_scaling"){
 					$stats_arr['mana'] += $basic_effect_value * $this->level;
 				}else if($basic_effect_key == "bonus_movement_speed_percent"){
