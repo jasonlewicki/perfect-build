@@ -9,10 +9,11 @@ class GlacialShroud extends \PerfectBuild\Items\Item{
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Glacial Shroud");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 950;	
+		$this->sell_value = 665;	
+		$this->basic_effects_arr['armor'] = 20;
+		$this->basic_effects_arr['mana'] = 250;
+		$this->effects_arr[] = new \PerfectBuild\Effects\GlacialShroud();
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

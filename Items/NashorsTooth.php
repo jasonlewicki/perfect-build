@@ -9,10 +9,11 @@ class NashorsTooth extends \PerfectBuild\Items\Item{
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Nashor's Tooth");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 2920;	
+		$this->sell_value = 2044;	
+		$this->basic_effects_arr['attack_speed_percent'] = 0.50;
+		$this->basic_effects_arr['ability_power'] = 60;
+		$this->effects_arr[] = new \PerfectBuild\Effects\NashorsTooth();
 	}	
 	
 	public function activate($caster_obj, $mob_obj){

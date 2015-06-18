@@ -9,10 +9,10 @@ class HextechRevolver extends \PerfectBuild\Items\Item{
 	// Constructor
 	public function __construct() {		
 		parent::__construct("Hextech Revolver");	
-		$this->cost = ;	
-		$this->sell_value = ;	
-		//$this->basic_effects_arr['cooldown_reduction_percent'] = 0.10;
-		//$this->effects_arr[] = new \PerfectBuild\Effects\ArdentCenser();
+		$this->cost = 1200;	
+		$this->sell_value = 840;	
+		$this->basic_effects_arr['ability_power'] = 40;
+		$this->effects_arr[] = new \PerfectBuild\Effects\HextechRevolver();
 	}	
 	
 	public function activate($caster_obj, $mob_obj){
