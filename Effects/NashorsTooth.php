@@ -11,7 +11,8 @@ class NashorsTooth extends \PerfectBuild\Effects\Effect{
 		parent::__construct("Nashor's Tooth");	
 		
 		$this->duration = false;
-		$this->basic_effects_arr['cooldown_reduction'] = 20.0;		
+		$this->basic_effects_arr['cooldown_reduction'] = 0.20;		
+		
 		//TODO: UNIQUE: Basic attacks deal 15 (+ 15% AP) bonus magic damage on hit
 		$this->unique = true;
 	}	
