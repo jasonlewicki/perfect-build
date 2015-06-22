@@ -14,6 +14,7 @@ class NashorsTooth extends \PerfectBuild\Effects\Effect{
 		$this->basic_effects_arr['cooldown_reduction'] = 0.20;		
 		
 		//TODO: UNIQUE: Basic attacks deal 15 (+ 15% AP) bonus magic damage on hit
+		
 		$this->unique = true;
 	}	
 	
