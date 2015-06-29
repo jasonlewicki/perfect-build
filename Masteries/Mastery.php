@@ -10,6 +10,6 @@ abstract Class Mastery{
 		$this->name = $name;
 	}
 	
-	// Add ranks, stats, parent/children?
+	// Add ranks, stats, parent/children, add to inventory?
 	
 }
