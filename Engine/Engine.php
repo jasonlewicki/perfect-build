@@ -12,7 +12,7 @@ Class Engine{
 		$this->tick_rate = 100; // 100 times a second
 	}
 	
-	// Step the game by 1 tick
+	// Step the game by 1 tick of time
 	public function step(){					
 		// Engine Stuff			
 		return $this->time++;		
