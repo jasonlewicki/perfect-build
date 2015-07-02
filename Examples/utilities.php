@@ -42,7 +42,6 @@ function displayResults($top_damage, $top_dps){
 		if(++$i >= 20) break;
 	}
 }
-
  
 /*********************************
  * 		 COMPLETE RUNE LIST
