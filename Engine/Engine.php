@@ -13,8 +13,7 @@ Class Engine{
 	}
 	
 	// Step the game by 1 tick of time
-	public function step(){					
-		// Engine Stuff			
+	public function step(){		
 		return $this->time++;		
 	}
 	
