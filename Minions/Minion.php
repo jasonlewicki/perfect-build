@@ -14,9 +14,6 @@ abstract Class Minion{
 	
 	public function __construct() {
 		
-	}
-	
-	
-	
+	}	
 	
 }
