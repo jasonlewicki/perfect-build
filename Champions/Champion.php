@@ -148,7 +148,7 @@ abstract Class Champion{
 	
 	public function attack($mob_obj){
 		
-		// TODO: Apply passives and on hits
+		// TODO: Apply passives and on hits?
 		
 		// Disable champion from other things while attacking
 		$this->addEffect('Disable', Array('duration' => $this->attackSpeed()));
