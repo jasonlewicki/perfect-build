@@ -8,7 +8,6 @@ class Fiddlesticks extends \PerfectBuild\Champions\Champion{
 	public function __construct($level, $spell_level_arr, $summoner_arr, $item_arr, $rune_arr, $masteries_arr) {		
 		parent::__construct($summoner_arr, $item_arr, $rune_arr, $masteries_arr);			
 			
-		// After implementation of masteries...
 		//$this->gold						= 0;
 		$this->level					= $level;
 		$this->experience				= 0;
