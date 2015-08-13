@@ -125,6 +125,7 @@ while(true){
 		
 		$complete = true;	
 		
+		// Check for actions to make for each step in the timeline
 		foreach($timeline as &$timeline_index){			
 			
 			if($timeline_index['status'] == 'queued'){
