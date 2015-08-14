@@ -163,7 +163,9 @@ $items_arr = Array();
 /*********************************
  * 		 COMPLETE LEVEL LIST
  *********************************/
+$levels_arr = Array();
 
 /*********************************
  * 		COMPLETE MASTERY LIST
  *********************************/
+ $masteries_arr = Array();
