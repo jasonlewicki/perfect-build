@@ -53,13 +53,14 @@ $rune_arr = Array(
 	'Seals' => Array()
 );
 
+// Counters
 $total_index = 0;
-
 $glyph_index = 0;
 $mark_index = 0;
 $quintessence_index = 0;
 $seal_index = 0;
 
+// Top Damage/DPS Lists
 $top_damage = Array();
 $top_dps = Array();
 
